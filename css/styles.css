@@ -463,7 +463,7 @@ footer {
 
     .hero-image {
         order: 1;
-        margin-top: 10rem;
+        margin-top: 8rem;
         scale: .8;
     }
 
@@ -486,7 +486,7 @@ footer {
         transition: left 0.3s;
     }
     .hero {
-        height: 110vh;
+        height: 120vh;
     }
     .nav-links.active {
         left: 0;
