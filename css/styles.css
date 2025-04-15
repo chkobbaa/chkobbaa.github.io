@@ -485,7 +485,9 @@ footer {
         padding-top: 2rem;
         transition: left 0.3s;
     }
-
+    .hero {
+        height: 110vh;
+    }
     .nav-links.active {
         left: 0;
     }
