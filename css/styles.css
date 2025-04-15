@@ -463,7 +463,8 @@ footer {
 
     .hero-image {
         order: 1;
-        margin-top: 8rem;
+        margin-top: 10rem;
+        scale: .8;
     }
 
     .hero-text h1 {
