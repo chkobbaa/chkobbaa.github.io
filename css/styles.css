@@ -454,7 +454,7 @@ footer {
     .contact-info,
     .contact-form {
         padding-right: 0;
-        margin-bottom: 2rem;
+        margin-top: 4rem;
     }
 
     .hero-text {
@@ -468,7 +468,7 @@ footer {
     }
 
     .hero-text h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 }
 
