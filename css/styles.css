@@ -169,6 +169,7 @@ nav {
 }
 #cspimg{
     width: 200px;
+    left: 68px;
 }
 
 .btn {
@@ -533,5 +534,6 @@ footer {
     width: 45em;
     z-index: -1;
 }
+
 
 
