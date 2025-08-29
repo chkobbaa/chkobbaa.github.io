@@ -156,6 +156,7 @@ nav {
 .hero-image {
     flex: 1;
     text-align: center;
+    justify-content: center;
 }
 
 .hero-image img {
@@ -532,4 +533,5 @@ footer {
     width: 45em;
     z-index: -1;
 }
+
 
