@@ -166,6 +166,9 @@ nav {
     width: 350px;
     border: 5px solid var(--card-bg);
 }
+#cspimg{
+    width: 200px;
+}
 
 .btn {
     display: inline-block;
@@ -529,3 +532,4 @@ footer {
     width: 45em;
     z-index: -1;
 }
+
