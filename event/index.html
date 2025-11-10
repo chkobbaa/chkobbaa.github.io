@@ -55,14 +55,6 @@
         </div>
     </div>
     
-    <div id="info-panel">
-        <h2>3D Paper with Lactic Acid Structure</h2>
-        <p>This interactive 3D scene shows a paper model with a lactic acid structure and another floating model.</p>
-        <div id="controls">
-            <button id="rotate-btn">Auto Rotate</button>
-            <button id="reset-btn">Reset View</button>
-        </div>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.min.js"></script>
@@ -93,11 +85,11 @@
             controls.autoRotate = 0;
             controls.autoRotateSpeed = 1.0;
 
-            // Ambient light
+            
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
             scene.add(ambientLight);
 
-            // Directional lights from all directions for even lighting
+            
             const directions = [
                 [1,0,0], [-1,0,0], [0,1,0], [0,-1,0], [0,0,1], [0,0,-1]
             ];
@@ -107,7 +99,7 @@
                 scene.add(light);
             });
 
-            // Load first model
+            
             const loader = new THREE.GLTFLoader();
             loader.load('paper1.gltf', gltf => {
                 model1 = gltf.scene;
@@ -119,22 +111,21 @@
 
                 adjustCamera(box);
 
-                // Load second model
+                
                 loader.load('lactic.glb', gltf2 => {
                     model2 = gltf2.scene;
                     scene.add(model2);
 
-                    // Position second model wherever you want
-                    model2.rotation.y = 0;         // start rotation
-                    model2.scale.set(0.1,0.1,0.1); // scale down if needed
+                    
+                    model2.rotation.y = 0;         
+                    model2.scale.set(0.1,0.1,0.1); 
 
-                    // Optional: center the second model locally for rotation
+                    
                     const box2 = new THREE.Box3().setFromObject(model2);
                     const center2 = box2.getCenter(new THREE.Vector3());
                     model2.position.sub(center2);
-                    model2.position.set(0.33, .36, 0); // example position
+                    model2.position.set(0.33, .36, 0); 
 
-                    // Hide loading screen after both models are loaded
                     document.getElementById('loading').style.display = 'none';
                 }, undefined, err2 => {
                     console.error('Error loading second model:', err2);
@@ -157,23 +148,12 @@
             const maxDim = Math.max(size.x, size.y, size.z);
             const fov = camera.fov * (Math.PI / 180);
             let cameraZ = Math.abs(maxDim / Math.sin(fov / 2) -5.5);
-            cameraZ *= 1.5; // padding
+            cameraZ *= 1.5; 
             camera.position.z = cameraZ;
             camera.position.y = maxDim / 2;
             controls.update();
         }
 
-        function toggleAutoRotate() {
-            autoRotate = !autoRotate;
-            controls.autoRotate = autoRotate;
-            document.getElementById('rotate-btn').textContent =
-                autoRotate ? 'Stop Rotation' : 'Auto Rotate';
-        }
-
-        function resetView() {
-            controls.reset();
-            camera.position.set(0,5,10);
-        }
 
         function onWindowResize() {
             camera.aspect = window.innerWidth/window.innerHeight;
@@ -184,9 +164,8 @@
         function animate() {
             requestAnimationFrame(animate);
 
-            // Rotate only the second model
             if (model2) {
-                model2.rotation.y += 0.01; // adjust speed here
+                model2.rotation.y += 0.01; 
             }
 
             controls.update();
