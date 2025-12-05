@@ -120,7 +120,7 @@ header {
     border-bottom: 1px solid var(--glass-border);
     position: fixed;
     width: 100%;
-        left: 0;
+    left: 0;
     z-index: 1000;
     transition: all 0.3s ease;
 }
@@ -194,7 +194,7 @@ nav {
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.12s ease;
 }
 
 .nav-links a:hover::before,
@@ -258,8 +258,10 @@ nav {
 
 .hero {
     min-height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 100px 5% 60px;
     background: var(--gradient-hero);
     position: relative;
@@ -1345,7 +1347,7 @@ textarea:focus-visible {
             rgba(139, 92, 246, 0.08) 0%,
             rgba(6, 182, 212, 0.04) 30%,
             transparent 70%);
-    transition: opacity 0.3s ease;
+    transition: opacity 0.12s ease;
 }
 
 .dark-mode .cursor-glow {
@@ -1353,4 +1355,681 @@ textarea:focus-visible {
             rgba(139, 92, 246, 0.12) 0%,
             rgba(236, 72, 153, 0.06) 30%,
             transparent 70%);
+}
+
+/* ============================================
+   NOISE/GRAIN TEXTURE OVERLAY
+   ============================================ */
+
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.dark-mode .noise-overlay {
+    opacity: 0.05;
+}
+
+/* ============================================
+   CUSTOM ANIMATED CURSOR
+   ============================================ */
+
+.custom-cursor {
+    display: none;
+}
+
+@media (hover: hover) and (min-width: 768px) {
+    .custom-cursor {
+        display: block;
+    }
+
+    body {
+        cursor: none;
+    }
+
+    a,
+    button,
+    .btn,
+    .project-card,
+    .skill-card,
+    .tech-pill {
+        cursor: none;
+    }
+
+    .cursor-dot {
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 10001;
+        transform: translate(-50%, -50%) scale(1);
+        transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    background 0.12s ease,
+                    box-shadow 0.12s ease;
+    }
+
+    .cursor-ring {
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition: width 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    height 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    border-color 0.12s ease,
+                    opacity 0.12s ease;
+        opacity: 0.5;
+    }
+
+    .cursor-hover .cursor-dot {
+        transform: translate(-50%, -50%) scale(2);
+        background: var(--accent-color);
+        box-shadow: 0 0 20px var(--accent-color);
+    }
+
+    .cursor-hover .cursor-ring {
+        width: 60px;
+        height: 60px;
+        border-color: var(--accent-color);
+        opacity: 0.3;
+    }
+
+    @keyframes cursorDotPulse {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+            background: var(--primary-color);
+        }
+
+        50% {
+            transform: translate(-50%, -50%) scale(2.5);
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(2);
+            background: var(--accent-color);
+        }
+    }
+
+    @keyframes cursorRingExpand {
+        0% {
+            width: 40px;
+            height: 40px;
+            border-color: var(--primary-color);
+            opacity: 0.5;
+        }
+
+        50% {
+            width: 70px;
+            height: 70px;
+            opacity: 0.6;
+        }
+
+        100% {
+            width: 60px;
+            height: 60px;
+            border-color: var(--accent-color);
+            opacity: 0.3;
+        }
+    }
+}
+
+/* ============================================
+   PARALLAX FLOATING ELEMENTS
+   ============================================ */
+
+.parallax-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.parallax-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+}
+
+.parallax-shape.shape-1 {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    top: 10%;
+    left: 5%;
+}
+
+.parallax-shape.shape-2 {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    top: 60%;
+    right: 10%;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+.parallax-shape.shape-3 {
+    width: 150px;
+    height: 150px;
+    background: var(--accent-color);
+    bottom: 20%;
+    left: 15%;
+}
+
+.parallax-shape.shape-4 {
+    width: 100px;
+    height: 100px;
+    background: var(--primary-color);
+    top: 30%;
+    right: 20%;
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+}
+
+.parallax-shape.shape-5 {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    bottom: 40%;
+    right: 5%;
+}
+
+/* ============================================
+   SCROLL DOWN INDICATOR
+   ============================================ */
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: fadeInUp 1s ease 1s forwards;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.scroll-arrow {
+    width: 30px;
+    height: 50px;
+    border: 2px solid var(--primary-color);
+    border-radius: 25px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.scroll-arrow i {
+    position: absolute;
+    top: 8px;
+    font-size: 12px;
+    color: var(--primary-color);
+    animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(15px);
+        opacity: 0.3;
+    }
+}
+
+/* ============================================
+   ANIMATED GRADIENT TEXT
+   ============================================ */
+
+.gradient-text {
+    background: linear-gradient(90deg,
+            #8b5cf6 0%,
+            #ec4899 25%,
+            #06b6d4 50%,
+            #ec4899 75%,
+            #8b5cf6 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s linear infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+/* ============================================
+   GLITCH TEXT EFFECT
+   ============================================ */
+
+.glitch-hover {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch-hover:hover {
+    animation: glitch 0.3s ease;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+        text-shadow: none;
+    }
+
+    20% {
+        transform: translate(-3px, 3px);
+        text-shadow: 3px 0 #ec4899, -3px 0 #06b6d4;
+    }
+
+    40% {
+        transform: translate(3px, -3px);
+        text-shadow: -3px 0 #ec4899, 3px 0 #06b6d4;
+    }
+
+    60% {
+        transform: translate(-2px, 2px);
+        text-shadow: 2px 0 #ec4899, -2px 0 #06b6d4;
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+        text-shadow: -2px 0 #ec4899, 2px 0 #06b6d4;
+    }
+
+    100% {
+        transform: translate(0);
+        text-shadow: none;
+    }
+}
+
+/* Glitch effect pseudo-elements for stronger visual */
+.glitch-hover::before,
+.glitch-hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.glitch-hover:hover::before {
+    animation: glitchTop 0.3s ease;
+    color: #ec4899;
+    z-index: -1;
+}
+
+.glitch-hover:hover::after {
+    animation: glitchBottom 0.3s ease;
+    color: #06b6d4;
+    z-index: -2;
+}
+
+@keyframes glitchTop {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: translate(0);
+    }
+
+    20%,
+    80% {
+        opacity: 0.8;
+    }
+
+    25% {
+        transform: translate(-3px, -3px);
+    }
+
+    50% {
+        transform: translate(3px, 3px);
+    }
+
+    75% {
+        transform: translate(-2px, 2px);
+    }
+}
+
+@keyframes glitchBottom {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: translate(0);
+    }
+
+    20%,
+    80% {
+        opacity: 0.8;
+    }
+
+    25% {
+        transform: translate(3px, 3px);
+    }
+
+    50% {
+        transform: translate(-3px, -3px);
+    }
+
+    75% {
+        transform: translate(2px, -2px);
+    }
+}
+
+/* ============================================
+   STATS SECTION
+   ============================================ */
+
+.stats-section {
+    background: var(--gradient-primary);
+    padding: 4rem 5%;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.stats-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.stat-item {
+    text-align: center;
+    color: white;
+    padding: 1.5rem;
+}
+
+.stat-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.stat-suffix {
+    font-size: 2rem;
+    margin-left: -0.5rem;
+}
+
+.stat-label {
+    font-size: 1rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ============================================
+   TECH STACK PILLS
+   ============================================ */
+
+#tech-stack {
+    background: var(--bg-color);
+}
+
+.tech-pills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.tech-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    font-weight: 500;
+    color: var(--text-color);
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.tech-pill i {
+    font-size: 1.3rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.pill-glow {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity 0.12s ease;
+    z-index: -1;
+}
+
+.tech-pill:hover {
+    transform: translateY(-5px) scale(1.05);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+}
+
+.tech-pill:hover .pill-glow {
+    opacity: 1;
+}
+
+.tech-pill:hover i {
+    -webkit-text-fill-color: white;
+}
+
+/* Tooltip */
+.tech-pill::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.tech-pill::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--secondary-color);
+    opacity: 0;
+    transition: opacity 0.12s ease;
+}
+
+.tech-pill:hover::after,
+.tech-pill:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================
+   MAGNETIC BUTTON ENHANCEMENT
+   ============================================ */
+
+.magnetic-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.magnetic-btn::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    transition: left 0.5s ease;
+}
+
+.magnetic-btn:hover::after {
+    left: 100%;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS FOR NEW ELEMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+    .scroll-indicator {
+        display: none;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+    }
+
+    .tech-pill {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .tech-pill::after,
+    .tech-pill::before {
+        display: none;
+    }
+
+    .parallax-container {
+        display: none;
+    }
+}
+
+
+
+/* ============================================
+   WORD-LEVEL GLITCH EFFECT
+   ============================================ */
+
+.glitch-word {
+    display: inline-block;
+    position: relative;
+    cursor: default;
+}
+
+.glitch-word.glitching {
+    animation: wordGlitch 0.4s ease forwards;
+}
+
+@keyframes wordGlitch {
+    0% {
+        transform: translate(0);
+        text-shadow: none;
+    }
+    10% {
+        transform: translate(-2px, 1px);
+        text-shadow: 2px 0 #ec4899, -2px 0 #06b6d4;
+    }
+    20% {
+        transform: translate(2px, -1px);
+        text-shadow: -2px 0 #ec4899, 2px 0 #06b6d4;
+    }
+    30% {
+        transform: translate(-1px, 2px);
+        text-shadow: 1px 0 #ec4899, -1px 0 #06b6d4;
+    }
+    40% {
+        transform: translate(1px, -2px);
+        text-shadow: -1px 0 #ec4899, 1px 0 #06b6d4;
+    }
+    50% {
+        transform: translate(-2px, -1px);
+        text-shadow: 2px 0 #ec4899, -2px 0 #06b6d4;
+    }
+    60% {
+        transform: translate(2px, 1px);
+        text-shadow: -2px 0 #ec4899, 2px 0 #06b6d4;
+    }
+    70% {
+        transform: translate(-1px, -2px);
+        text-shadow: 1px 0 #ec4899, -1px 0 #06b6d4;
+    }
+    80% {
+        transform: translate(1px, 2px);
+        text-shadow: -1px 0 #ec4899, 1px 0 #06b6d4;
+    }
+    90% {
+        transform: translate(-1px, 1px);
+        text-shadow: 1px 0 #ec4899, -1px 0 #06b6d4;
+    }
+    100% {
+        transform: translate(0);
+        text-shadow: none;
+    }
 }

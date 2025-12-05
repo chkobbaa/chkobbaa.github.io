@@ -408,3 +408,240 @@ if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches) {
 
     animateGlow();
 }
+
+// ============================================
+// CUSTOM ANIMATED CURSOR
+// ============================================
+
+if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches) {
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorRing = document.querySelector('.cursor-ring');
+
+    if (cursorDot && cursorRing) {
+        let mouseX = 0, mouseY = 0;
+        let dotX = 0, dotY = 0;
+        let ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            // Dot follows immediately
+            dotX += (mouseX - dotX) * 0.5;
+            dotY += (mouseY - dotY) * 0.5;
+            cursorDot.style.left = dotX + 'px';
+            cursorDot.style.top = dotY + 'px';
+
+            // Ring follows with lag
+            ringX += (mouseX - ringX) * 0.15;
+            ringY += (mouseY - ringY) * 0.15;
+            cursorRing.style.left = ringX + 'px';
+            cursorRing.style.top = ringY + 'px';
+
+            requestAnimationFrame(animateCursor);
+        }
+
+        animateCursor();
+
+        // Hover effect on interactive elements
+        const hoverElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-card, .tech-pill, .social-links a');
+
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.body.classList.add('cursor-hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                document.body.classList.remove('cursor-hover');
+            });
+        });
+    }
+}
+
+// ============================================
+// PARALLAX FLOATING ELEMENTS
+// ============================================
+
+const parallaxShapes = document.querySelectorAll('.parallax-shape');
+
+if (parallaxShapes.length > 0 && window.matchMedia('(min-width: 768px)').matches) {
+    const speeds = [0.02, 0.03, 0.015, 0.025, 0.02];
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.pageYOffset;
+
+        parallaxShapes.forEach((shape, index) => {
+            const speed = speeds[index] || 0.02;
+            const yPos = scrollY * speed * (index % 2 === 0 ? 1 : -1);
+            const xPos = scrollY * speed * 0.5 * (index % 2 === 0 ? -1 : 1);
+
+            shape.style.transform = `translate(${xPos}px, ${yPos}px)`;
+        });
+    });
+}
+
+// ============================================
+// ANIMATED STATS COUNTER
+// ============================================
+
+const statNumbers = document.querySelectorAll('.stat-number');
+
+const animateCounter = (element) => {
+    const target = parseInt(element.getAttribute('data-target'));
+    const duration = 2000;
+    const increment = target / (duration / 16);
+    let current = 0;
+
+    const updateCounter = () => {
+        current += increment;
+        if (current < target) {
+            element.textContent = Math.floor(current);
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = target;
+        }
+    };
+
+    updateCounter();
+};
+
+// Use Intersection Observer to trigger counter when visible
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            statsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+statNumbers.forEach(stat => {
+    statsObserver.observe(stat);
+});
+
+// ============================================
+// SCROLL INDICATOR HIDE ON SCROLL
+// ============================================
+
+const scrollIndicator = document.querySelector('.scroll-indicator');
+
+if (scrollIndicator) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            scrollIndicator.style.opacity = '0';
+            scrollIndicator.style.pointerEvents = 'none';
+        } else {
+            scrollIndicator.style.opacity = '1';
+            scrollIndicator.style.pointerEvents = 'auto';
+        }
+    });
+
+    scrollIndicator.addEventListener('click', () => {
+        const aboutSection = document.querySelector('#stats') || document.querySelector('#about');
+        if (aboutSection) {
+            smoothScrollTo(aboutSection.offsetTop - 80, 800);
+        }
+    });
+}
+
+// ============================================
+// MAGNETIC BUTTON EFFECT (Enhanced)
+// ============================================
+
+if (window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.magnetic-btn').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            btn.style.transform = ranslate(+ (x * 0.3) + px, + (y * 0.3) + px);
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translate(0, 0)';
+        });
+    });
+}
+
+// ============================================
+// TECH PILLS HOVER SOUND (Optional visual feedback)
+// ============================================
+
+document.querySelectorAll('.tech-pill').forEach(pill => {
+    pill.addEventListener('mouseenter', () => {
+        pill.style.transform = 'translateY(-5px) scale(1.05)';
+    });
+
+    pill.addEventListener('mouseleave', () => {
+        pill.style.transform = 'translateY(0) scale(1)';
+    });
+});
+
+
+// ============================================
+// WORD-LEVEL GLITCH EFFECT
+// ============================================
+
+function wrapWordsWithGlitch() {
+    // Target all text-containing elements (exclude inputs, scripts, etc.)
+    const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, span, li, button, label');
+
+    textElements.forEach(element => {
+        // Skip if already processed or has special classes
+        if (element.classList.contains('glitch-processed') ||
+            element.classList.contains('stat-number') ||
+            element.classList.contains('gradient-text') ||
+            element.closest('.tech-pill') ||
+            element.closest('script') ||
+            element.closest('style') ||
+            element.closest('.about-text h3') ||
+            element.closest('.project-info') ||
+            element.closest('.skill-card h3') ||
+            element.closest('.contact-info h3') ||
+            element.querySelector('img')) {
+            return;
+        }
+
+        // Get direct text nodes only
+        const childNodes = Array.from(element.childNodes);
+
+        childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+                const words = node.textContent.split(/(\s+)/);
+                const fragment = document.createDocumentFragment();
+
+                words.forEach(word => {
+                    if (word.trim()) {
+                        const span = document.createElement('span');
+                        span.className = 'glitch-word';
+                        span.textContent = word;
+                        fragment.appendChild(span);
+                    } else {
+                        fragment.appendChild(document.createTextNode(word));
+                    }
+                });
+
+                node.parentNode.replaceChild(fragment, node);
+            }
+        });
+
+        element.classList.add('glitch-processed');
+    });
+}
+
+// Initialize word wrapping
+wrapWordsWithGlitch();
+
+// Add glitch trigger on hover - animation completes even if mouse leaves
+document.addEventListener('mouseenter', (e) => {
+    if (e.target.classList.contains('glitch-word') && !e.target.classList.contains('glitching')) {
+        e.target.classList.add('glitching');
+
+        // Remove class after animation completes (0.4s)
+        setTimeout(() => {
+            e.target.classList.remove('glitching');
+        }, 400);
+    }
+}, true);
