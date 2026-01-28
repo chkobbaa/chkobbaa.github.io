@@ -6,11 +6,15 @@
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 const navLinksAll = document.querySelectorAll('.nav-links a');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     hamburger.querySelector('i').classList.toggle('fa-bars');
     hamburger.querySelector('i').classList.toggle('fa-times');
+    const isExpanded = navLinks.classList.contains('active');
+    hamburger.setAttribute('aria-expanded', String(isExpanded));
+    hamburger.setAttribute('aria-label', isExpanded ? 'Close menu' : 'Open menu');
 });
 
 // Close mobile menu when clicking a link
@@ -19,6 +23,8 @@ navLinksAll.forEach(link => {
         navLinks.classList.remove('active');
         hamburger.querySelector('i').classList.add('fa-bars');
         hamburger.querySelector('i').classList.remove('fa-times');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Open menu');
     });
 });
 
@@ -81,6 +87,10 @@ window.addEventListener('load', updateActiveNav);
 // ============================================
 
 function smoothScrollTo(targetPosition, duration = 1000) {
+    if (prefersReducedMotion) {
+        window.scrollTo(0, targetPosition);
+        return;
+    }
     const startPosition = window.pageYOffset;
     const distance = targetPosition - startPosition;
     let startTime = null;
@@ -131,28 +141,35 @@ const observerOptions = {
     rootMargin: '0px 0px -50px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-            observer.unobserve(entry.target);
-        }
+if (!prefersReducedMotion) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animations
+    document.querySelectorAll('.skill-card, .project-card, .about-content, .contact-container').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(40px)';
+        observer.observe(el);
     });
-}, observerOptions);
 
-// Observe elements for animations
-document.querySelectorAll('.skill-card, .project-card, .about-content, .contact-container').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(40px)';
-    observer.observe(el);
-});
-
-// Section title animations
-document.querySelectorAll('.section-title').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    observer.observe(el);
-});
+    // Section title animations
+    document.querySelectorAll('.section-title').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        observer.observe(el);
+    });
+} else {
+    document.querySelectorAll('.skill-card, .project-card, .about-content, .contact-container, .section-title').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+    });
+}
 
 // ============================================
 // TYPING ANIMATION FOR HERO
@@ -161,27 +178,30 @@ document.querySelectorAll('.section-title').forEach(el => {
 const heroTitle = document.querySelector('.hero-text h1 span');
 if (heroTitle) {
     const originalText = heroTitle.textContent;
-    heroTitle.textContent = '';
+    if (prefersReducedMotion) {
+        heroTitle.textContent = originalText;
+    } else {
+        heroTitle.textContent = '';
+        let charIndex = 0;
 
-    let charIndex = 0;
-
-    function typeText() {
-        if (charIndex < originalText.length) {
-            heroTitle.textContent += originalText.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeText, 80);
+        function typeText() {
+            if (charIndex < originalText.length) {
+                heroTitle.textContent += originalText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeText, 80);
+            }
         }
-    }
 
-    // Start typing after a small delay
-    setTimeout(typeText, 500);
+        // Start typing after a small delay
+        setTimeout(typeText, 500);
+    }
 }
 
 // ============================================
 // MAGNETIC BUTTON EFFECT (Desktop only)
 // ============================================
 
-if (window.matchMedia('(hover: hover)').matches) {
+if (window.matchMedia('(hover: hover)').matches && !prefersReducedMotion) {
     document.querySelectorAll('.btn').forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
@@ -201,7 +221,7 @@ if (window.matchMedia('(hover: hover)').matches) {
 // 3D TILT EFFECT FOR PROJECT CARDS (Desktop only)
 // ============================================
 
-if (window.matchMedia('(hover: hover)').matches) {
+if (window.matchMedia('(hover: hover)').matches && !prefersReducedMotion) {
     document.querySelectorAll('.project-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
@@ -321,7 +341,7 @@ prefersDarkScheme.addEventListener('change', (e) => {
 const hero = document.querySelector('.hero');
 const heroImage = document.querySelector('.hero-image img');
 
-if (window.matchMedia('(hover: hover)').matches && heroImage) {
+if (window.matchMedia('(hover: hover)').matches && heroImage && !prefersReducedMotion) {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         const heroHeight = hero.offsetHeight;
@@ -351,8 +371,9 @@ function createFloatingShapes() {
 
     heroSection.appendChild(shapesContainer);
 }
-
-createFloatingShapes();
+if (!prefersReducedMotion) {
+    createFloatingShapes();
+}
 
 // ============================================
 // PRELOADER (Optional - shows brief loading state)
@@ -362,25 +383,34 @@ window.addEventListener('load', () => {
     document.body.style.opacity = '1';
 
     // Trigger initial animations
-    setTimeout(() => {
+    if (!prefersReducedMotion) {
+        setTimeout(() => {
+            document.querySelectorAll('.hero-text, .hero-image').forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        }, 100);
+    } else {
         document.querySelectorAll('.hero-text, .hero-image').forEach(el => {
             el.style.opacity = '1';
             el.style.transform = 'translateY(0)';
         });
-    }, 100);
+    }
 });
 
 // Initial state for hero elements
 document.querySelectorAll('.hero-text, .hero-image').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    if (!prefersReducedMotion) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    }
 });
 // ============================================
 // CURSOR GLOW EFFECT (Desktop only)
 // ============================================
 
-if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches) {
+if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches && !prefersReducedMotion) {
     const cursorGlow = document.createElement('div');
     cursorGlow.className = 'cursor-glow';
     document.body.appendChild(cursorGlow);
@@ -413,7 +443,7 @@ if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches) {
 // CUSTOM ANIMATED CURSOR
 // ============================================
 
-if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches) {
+if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches && !prefersReducedMotion) {
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorRing = document.querySelector('.cursor-ring');
 
@@ -465,7 +495,7 @@ if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches) {
 
 const parallaxShapes = document.querySelectorAll('.parallax-shape');
 
-if (parallaxShapes.length > 0 && window.matchMedia('(min-width: 768px)').matches) {
+if (parallaxShapes.length > 0 && window.matchMedia('(min-width: 768px)').matches && !prefersReducedMotion) {
     const speeds = [0.02, 0.03, 0.015, 0.025, 0.02];
 
     window.addEventListener('scroll', () => {
@@ -489,6 +519,10 @@ const statNumbers = document.querySelectorAll('.stat-number');
 
 const animateCounter = (element) => {
     const target = parseInt(element.getAttribute('data-target'));
+    if (prefersReducedMotion) {
+        element.textContent = target;
+        return;
+    }
     const duration = 2000;
     const increment = target / (duration / 16);
     let current = 0;
@@ -549,14 +583,14 @@ if (scrollIndicator) {
 // MAGNETIC BUTTON EFFECT (Enhanced)
 // ============================================
 
-if (window.matchMedia('(hover: hover)').matches) {
+if (window.matchMedia('(hover: hover)').matches && !prefersReducedMotion) {
     document.querySelectorAll('.magnetic-btn').forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
 
-            btn.style.transform = ranslate(+ (x * 0.3) + px, + (y * 0.3) + px);
+            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
         });
 
         btn.addEventListener('mouseleave', () => {
@@ -569,15 +603,17 @@ if (window.matchMedia('(hover: hover)').matches) {
 // TECH PILLS HOVER SOUND (Optional visual feedback)
 // ============================================
 
-document.querySelectorAll('.tech-pill').forEach(pill => {
-    pill.addEventListener('mouseenter', () => {
-        pill.style.transform = 'translateY(-5px) scale(1.05)';
-    });
+if (!prefersReducedMotion) {
+    document.querySelectorAll('.tech-pill').forEach(pill => {
+        pill.addEventListener('mouseenter', () => {
+            pill.style.transform = 'translateY(-5px) scale(1.05)';
+        });
 
-    pill.addEventListener('mouseleave', () => {
-        pill.style.transform = 'translateY(0) scale(1)';
+        pill.addEventListener('mouseleave', () => {
+            pill.style.transform = 'translateY(0) scale(1)';
+        });
     });
-});
+}
 
 
 // ============================================
@@ -631,20 +667,22 @@ function wrapWordsWithGlitch() {
     });
 }
 
-// Initialize word wrapping
-wrapWordsWithGlitch();
+if (!prefersReducedMotion) {
+    // Initialize word wrapping
+    wrapWordsWithGlitch();
 
-// Add glitch trigger on hover - animation completes even if mouse leaves
-document.addEventListener('mouseenter', (e) => {
-    if (e.target.classList.contains('glitch-word') && !e.target.classList.contains('glitching')) {
-        e.target.classList.add('glitching');
+    // Add glitch trigger on hover - animation completes even if mouse leaves
+    document.addEventListener('mouseenter', (e) => {
+        if (e.target.classList.contains('glitch-word') && !e.target.classList.contains('glitching')) {
+            e.target.classList.add('glitching');
 
-        // Remove class after animation completes (0.4s)
-        setTimeout(() => {
-            e.target.classList.remove('glitching');
-        }, 400);
-    }
-}, true);
+            // Remove class after animation completes (0.4s)
+            setTimeout(() => {
+                e.target.classList.remove('glitching');
+            }, 400);
+        }
+    }, true);
+}
 
 // ============================================
 // SERVICE WORKER REGISTRATION

@@ -2,8 +2,6 @@
    MODERN CREATIVE PORTFOLIO - STYLES
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
-
 :root {
     /* Primary Gradient Colors */
     --primary-color: #8b5cf6;
@@ -81,6 +79,30 @@ body {
     line-height: 1.7;
     position: relative;
     transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.skip-link {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--gradient-primary);
+    color: #fff;
+    border-radius: 8px;
+    z-index: 10000;
+    transform: translateY(-200%);
+    transition: transform 0.2s ease;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+:focus-visible {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 3px;
 }
 
 h1,
@@ -215,6 +237,8 @@ nav {
     padding: 0.5rem;
     border-radius: 8px;
     transition: all 0.3s ease;
+    background: none;
+    border: none;
 }
 
 .hamburger:hover {
@@ -2031,5 +2055,27 @@ textarea:focus-visible {
     100% {
         transform: translate(0);
         text-shadow: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .parallax-container,
+    .floating-shapes,
+    .cursor-glow,
+    .custom-cursor {
+        display: none !important;
     }
 }
