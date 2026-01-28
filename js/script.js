@@ -7,6 +7,11 @@ const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 const navLinksAll = document.querySelectorAll('.nav-links a');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canUseCustomCursor = window.matchMedia('(hover: hover) and (min-width: 768px)').matches && !prefersReducedMotion;
+
+if (canUseCustomCursor) {
+    document.body.classList.add('custom-cursor-enabled');
+}
 
 hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
@@ -410,7 +415,7 @@ document.querySelectorAll('.hero-text, .hero-image').forEach(el => {
 // CURSOR GLOW EFFECT (Desktop only)
 // ============================================
 
-if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches && !prefersReducedMotion) {
+if (canUseCustomCursor) {
     document.body.classList.add('custom-cursor-enabled');
     const cursorGlow = document.createElement('div');
     cursorGlow.className = 'cursor-glow';
@@ -444,7 +449,7 @@ if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches && !prefe
 // CUSTOM ANIMATED CURSOR
 // ============================================
 
-if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches && !prefersReducedMotion) {
+if (canUseCustomCursor) {
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorRing = document.querySelector('.cursor-ring');
 
