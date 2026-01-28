@@ -1410,20 +1410,20 @@ textarea:focus-visible {
 }
 
 @media (hover: hover) and (min-width: 768px) {
-    .custom-cursor {
+    body.custom-cursor-enabled .custom-cursor {
         display: block;
     }
 
-    body {
+    body.custom-cursor-enabled {
         cursor: none;
     }
 
-    a,
-    button,
-    .btn,
-    .project-card,
-    .skill-card,
-    .tech-pill {
+    body.custom-cursor-enabled a,
+    body.custom-cursor-enabled button,
+    body.custom-cursor-enabled .btn,
+    body.custom-cursor-enabled .project-card,
+    body.custom-cursor-enabled .skill-card,
+    body.custom-cursor-enabled .tech-pill {
         cursor: none;
     }
 

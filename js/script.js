@@ -411,6 +411,7 @@ document.querySelectorAll('.hero-text, .hero-image').forEach(el => {
 // ============================================
 
 if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches && !prefersReducedMotion) {
+    document.body.classList.add('custom-cursor-enabled');
     const cursorGlow = document.createElement('div');
     cursorGlow.className = 'cursor-glow';
     document.body.appendChild(cursorGlow);
