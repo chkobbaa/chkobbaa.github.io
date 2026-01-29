@@ -96,6 +96,7 @@ body {
 /* Scroll-linked reveal system */
 [data-reveal] {
     --reveal: 0;
+    will-change: transform, opacity;
 }
 
 [data-reveal] .reveal-child,
@@ -103,6 +104,7 @@ body {
     --child-progress: clamp(0, calc(var(--reveal) - (var(--i) * 0.08)), 1);
     opacity: var(--child-progress);
     transform: translate3d(0, calc((1 - var(--child-progress)) * 20px), 0);
+    will-change: transform, opacity;
 }
 
 [data-reveal] {

@@ -156,7 +156,8 @@ revealSections.forEach(section => {
     });
 });
 
-let revealTicking = false;
+let lastScrollY = -1;
+let lastViewportH = -1;
 
 function updateReveals() {
     const vh = window.innerHeight || 0;
@@ -168,26 +169,32 @@ function updateReveals() {
         const raw = (start - rect.top) / (start - end);
         const clamped = Math.min(Math.max(raw, 0), 1);
         const eased = motionEasing(clamped);
-        section.style.setProperty('--reveal', eased.toFixed(3));
+        section.style.setProperty('--reveal', eased);
     });
-
-    revealTicking = false;
 }
 
-function requestRevealUpdate() {
+function scrollLinkedLoop() {
     if (prefersReducedMotion) {
         revealSections.forEach(section => section.style.setProperty('--reveal', '1'));
         return;
     }
-    if (!revealTicking) {
-        revealTicking = true;
-        requestAnimationFrame(updateReveals);
+
+    const currentScroll = window.scrollY || document.documentElement.scrollTop;
+    const currentVh = window.innerHeight || 0;
+
+    if (currentScroll !== lastScrollY || currentVh !== lastViewportH) {
+        lastScrollY = currentScroll;
+        lastViewportH = currentVh;
+        updateReveals();
     }
+
+    requestAnimationFrame(scrollLinkedLoop);
 }
 
-window.addEventListener('scroll', requestRevealUpdate, { passive: true });
-window.addEventListener('resize', requestRevealUpdate);
-window.addEventListener('load', requestRevealUpdate);
+window.addEventListener('load', () => {
+    updateReveals();
+    requestAnimationFrame(scrollLinkedLoop);
+});
 
 // ============================================
 // TYPING ANIMATION FOR HERO
