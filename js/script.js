@@ -88,10 +88,21 @@ window.addEventListener('scroll', updateActiveNav);
 window.addEventListener('load', updateActiveNav);
 
 // ============================================
+// MOTION SYSTEM
+// ============================================
+
+const motionEasing = (t) => 1 - Math.pow(1 - t, 3);
+const MOTION = {
+    fast: 200,
+    medium: 400,
+    slow: 700
+};
+
+// ============================================
 // SMOOTH SCROLLING (Enhanced with custom easing)
 // ============================================
 
-function smoothScrollTo(targetPosition, duration = 1000) {
+function smoothScrollTo(targetPosition, duration = MOTION.slow) {
     if (prefersReducedMotion) {
         window.scrollTo(0, targetPosition);
         return;
@@ -100,16 +111,11 @@ function smoothScrollTo(targetPosition, duration = 1000) {
     const distance = targetPosition - startPosition;
     let startTime = null;
 
-    // Easing function - easeOutQuart for buttery smooth feel
-    function easeOutQuart(t) {
-        return 1 - Math.pow(1 - t, 4);
-    }
-
     function animation(currentTime) {
         if (startTime === null) startTime = currentTime;
         const timeElapsed = currentTime - startTime;
         const progress = Math.min(timeElapsed / duration, 1);
-        const ease = easeOutQuart(progress);
+        const ease = motionEasing(progress);
 
         window.scrollTo(0, startPosition + distance * ease);
 
@@ -132,49 +138,56 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             const headerHeight = header.offsetHeight;
             const targetPosition = targetElement.offsetTop - headerHeight;
 
-            smoothScrollTo(targetPosition, 900);
+            smoothScrollTo(targetPosition, MOTION.slow);
         }
     });
 });
 
 // ============================================
-// SCROLL-TRIGGERED ANIMATIONS
+// SCROLL-LINKED REVEAL SYSTEM (rAF)
 // ============================================
 
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+const revealSections = Array.from(document.querySelectorAll('[data-reveal]'));
 
-if (!prefersReducedMotion) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
+revealSections.forEach(section => {
+    const children = section.querySelectorAll('[data-reveal-child]');
+    children.forEach((child, index) => {
+        child.style.setProperty('--i', index);
+    });
+});
 
-    // Observe elements for animations
-    document.querySelectorAll('.skill-card, .project-card, .about-content, .contact-container').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(40px)';
-        observer.observe(el);
+let revealTicking = false;
+
+function updateReveals() {
+    const vh = window.innerHeight || 0;
+    const start = vh * 0.85;
+    const end = vh * 0.35;
+
+    revealSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const raw = (start - rect.top) / (start - end);
+        const clamped = Math.min(Math.max(raw, 0), 1);
+        const eased = motionEasing(clamped);
+        section.style.setProperty('--reveal', eased.toFixed(3));
     });
 
-    // Section title animations
-    document.querySelectorAll('.section-title').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        observer.observe(el);
-    });
-} else {
-    document.querySelectorAll('.skill-card, .project-card, .about-content, .contact-container, .section-title').forEach(el => {
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-    });
+    revealTicking = false;
 }
+
+function requestRevealUpdate() {
+    if (prefersReducedMotion) {
+        revealSections.forEach(section => section.style.setProperty('--reveal', '1'));
+        return;
+    }
+    if (!revealTicking) {
+        revealTicking = true;
+        requestAnimationFrame(updateReveals);
+    }
+}
+
+window.addEventListener('scroll', requestRevealUpdate, { passive: true });
+window.addEventListener('resize', requestRevealUpdate);
+window.addEventListener('load', requestRevealUpdate);
 
 // ============================================
 // TYPING ANIMATION FOR HERO
@@ -193,12 +206,12 @@ if (heroTitle) {
             if (charIndex < originalText.length) {
                 heroTitle.textContent += originalText.charAt(charIndex);
                 charIndex++;
-                setTimeout(typeText, 80);
+                setTimeout(typeText, MOTION.fast);
             }
         }
 
         // Start typing after a small delay
-        setTimeout(typeText, 500);
+        setTimeout(typeText, MOTION.fast);
     }
 }
 
@@ -223,27 +236,45 @@ if (window.matchMedia('(hover: hover)').matches && !prefersReducedMotion) {
 }
 
 // ============================================
-// 3D TILT EFFECT FOR PROJECT CARDS (Desktop only)
+// CURSOR-AWARE TILT (Desktop only)
 // ============================================
 
-if (window.matchMedia('(hover: hover)').matches && !prefersReducedMotion) {
-    document.querySelectorAll('.project-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
+if (canUseCustomCursor) {
+    const tiltCards = document.querySelectorAll('.project-card, .skill-card');
+    const maxTilt = 5;
+
+    tiltCards.forEach(card => {
+        let rafId = null;
+        let targetX = 0;
+        let targetY = 0;
+
+        card.classList.add('tilt-card');
+
+        const updateTilt = () => {
+            const rotateX = -targetY * maxTilt;
+            const rotateY = targetX * maxTilt;
+            card.style.transform = `perspective(900px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+            rafId = null;
+        };
+
+        card.addEventListener('pointermove', (e) => {
             const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            const relX = (e.clientX - rect.left) / rect.width - 0.5;
+            const relY = (e.clientY - rect.top) / rect.height - 0.5;
+            targetX = Math.max(Math.min(relX, 0.5), -0.5) * 2;
+            targetY = Math.max(Math.min(relY, 0.5), -0.5) * 2;
 
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+            if (!rafId) {
+                rafId = requestAnimationFrame(updateTilt);
+            }
         });
 
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        card.addEventListener('pointerleave', () => {
+            targetX = 0;
+            targetY = 0;
+            if (!rafId) {
+                rafId = requestAnimationFrame(updateTilt);
+            }
         });
     });
 }
@@ -279,8 +310,8 @@ if (contactForm) {
                 submitBtn.textContent = originalText;
                 submitBtn.style.background = '';
                 submitBtn.disabled = false;
-            }, 2000);
-        }, 1000);
+            }, MOTION.slow);
+        }, MOTION.slow);
     });
 
     // Floating label effect for inputs
@@ -394,7 +425,7 @@ window.addEventListener('load', () => {
                 el.style.opacity = '1';
                 el.style.transform = 'translateY(0)';
             });
-        }, 100);
+        }, MOTION.fast);
     } else {
         document.querySelectorAll('.hero-text, .hero-image').forEach(el => {
             el.style.opacity = '1';
@@ -529,7 +560,7 @@ const animateCounter = (element) => {
         element.textContent = target;
         return;
     }
-    const duration = 2000;
+    const duration = MOTION.slow;
     const increment = target / (duration / 16);
     let current = 0;
 
@@ -580,7 +611,7 @@ if (scrollIndicator) {
     scrollIndicator.addEventListener('click', () => {
         const aboutSection = document.querySelector('#stats') || document.querySelector('#about');
         if (aboutSection) {
-            smoothScrollTo(aboutSection.offsetTop - 80, 800);
+            smoothScrollTo(aboutSection.offsetTop - 80, MOTION.slow);
         }
     });
 }

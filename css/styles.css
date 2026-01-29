@@ -36,6 +36,12 @@
     --header-bg: rgba(255, 255, 255, 0.8);
     --shadow-color: rgba(0, 0, 0, 0.08);
     --border-color: rgba(0, 194, 168, 0.2);
+
+    /* Motion System */
+    --motion-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --motion-fast: 200ms;
+    --motion-medium: 400ms;
+    --motion-slow: 700ms;
 }
 
 .dark-mode {
@@ -85,6 +91,23 @@ body {
     line-height: 1.7;
     position: relative;
     transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Scroll-linked reveal system */
+[data-reveal] {
+    --reveal: 0;
+}
+
+[data-reveal] .reveal-child,
+[data-reveal-child] {
+    --child-progress: clamp(0, calc(var(--reveal) - (var(--i) * 0.08)), 1);
+    opacity: var(--child-progress);
+    transform: translate3d(0, calc((1 - var(--child-progress)) * 20px), 0);
+}
+
+[data-reveal] {
+    opacity: var(--reveal);
+    transform: translate3d(0, calc((1 - var(--reveal)) * 30px), 0);
 }
 
 .skip-link {
@@ -206,7 +229,7 @@ nav {
     font-weight: 500;
     padding: 0.6rem 1.2rem;
     border-radius: 50px;
-    transition: all 0.3s ease;
+    transition: all var(--motion-fast) var(--motion-ease);
     position: relative;
 }
 
@@ -222,7 +245,7 @@ nav {
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
-    transition: opacity 0.12s ease;
+    transition: opacity var(--motion-fast) var(--motion-ease);
 }
 
 .nav-links a:hover::before,
@@ -242,7 +265,7 @@ nav {
     font-size: 1.5rem;
     padding: 0.5rem;
     border-radius: 8px;
-    transition: all 0.3s ease;
+    transition: all var(--motion-fast) var(--motion-ease);
     background: none;
     border: none;
 }
@@ -266,7 +289,7 @@ nav {
     gap: 0.5rem;
     padding: 0.6rem 1rem;
     border-radius: 50px;
-    transition: all 0.3s ease;
+    transition: all var(--motion-fast) var(--motion-ease);
     backdrop-filter: blur(10px);
 }
 
@@ -505,6 +528,107 @@ nav {
     margin-bottom: 1.5rem;
     color: var(--text-color);
     line-height: 1.1;
+}
+
+/* ============================================
+   IMPACT SECTION
+   ============================================ */
+
+.impact-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 8vw;
+    background: radial-gradient(circle at 20% 20%, rgba(0, 194, 168, 0.2), transparent 55%),
+        radial-gradient(circle at 80% 30%, rgba(255, 122, 89, 0.18), transparent 50%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 244, 250, 0.95) 100%);
+    overflow: hidden;
+}
+
+.dark-mode .impact-section {
+    background: radial-gradient(circle at 20% 20%, rgba(0, 194, 168, 0.2), transparent 55%),
+        radial-gradient(circle at 80% 30%, rgba(255, 122, 89, 0.18), transparent 50%),
+        linear-gradient(180deg, #0b1220 0%, #0e1628 100%);
+}
+
+.impact-backdrop {
+    position: absolute;
+    inset: -20% 0 0 0;
+    background-image: repeating-linear-gradient(90deg, rgba(15, 23, 42, 0.06) 0, rgba(15, 23, 42, 0.06) 1px, transparent 1px, transparent 120px);
+    opacity: 0.6;
+    animation: backdropSlide var(--motion-slow) var(--motion-ease) infinite alternate;
+    pointer-events: none;
+}
+
+.dark-mode .impact-backdrop {
+    background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0, rgba(255, 255, 255, 0.08) 1px, transparent 1px, transparent 120px);
+}
+
+@keyframes backdropSlide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(30px);
+    }
+}
+
+.impact-content {
+    position: relative;
+    max-width: 760px;
+    text-align: left;
+    z-index: 1;
+}
+
+.impact-kicker {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+}
+
+.impact-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+}
+
+.impact-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+}
+
+.impact-cta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.impact-signature {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.impact-motif {
+    position: absolute;
+    right: 6vw;
+    bottom: 10vh;
+    display: grid;
+    gap: 0.6rem;
+}
+
+.impact-motif span {
+    width: 64px;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    opacity: 0.7;
 }
 
 .hero-text h1 span {
@@ -814,7 +938,7 @@ section {
     border-radius: 24px;
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
-    transition: all 0.4s ease;
+    transition: box-shadow var(--motion-medium) var(--motion-ease);
     position: relative;
     overflow: hidden;
 }
@@ -835,7 +959,6 @@ section {
 }
 
 .skill-card:hover {
-    transform: translateY(-10px);
     box-shadow:
         var(--glass-shadow),
         var(--glow-primary);
@@ -898,7 +1021,12 @@ section {
     overflow: hidden;
     border: 1px solid rgba(15, 23, 42, 0.08);
     box-shadow: 0 30px 60px rgba(15, 23, 42, 0.08);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    transition: transform var(--motion-medium) var(--motion-ease), box-shadow var(--motion-medium) var(--motion-ease);
+}
+
+.tilt-card {
+    transform-style: preserve-3d;
+    transition: transform var(--motion-fast) var(--motion-ease), box-shadow var(--motion-medium) var(--motion-ease);
 }
 
 .dark-mode .project-card {
@@ -908,7 +1036,6 @@ section {
 }
 
 .project-card:hover {
-    transform: translateY(-6px);
     box-shadow: 0 40px 80px rgba(15, 23, 42, 0.12);
 }
 
@@ -1006,7 +1133,7 @@ section {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    transition: all 0.3s ease;
+    transition: all var(--motion-fast) var(--motion-ease);
 }
 
 .project-links a:hover {
@@ -1301,6 +1428,20 @@ footer p {
     .about-content {
         grid-template-columns: 1fr;
         text-align: center;
+    }
+
+    .impact-content {
+        text-align: center;
+    }
+
+    .impact-cta {
+        justify-content: center;
+    }
+
+    .impact-motif {
+        position: static;
+        margin-top: 2rem;
+        justify-content: center;
     }
 
     .project-card--featured {
@@ -2218,5 +2359,11 @@ textarea:focus-visible {
     .cursor-glow,
     .custom-cursor {
         display: none !important;
+    }
+
+    .hero-grid,
+    .impact-backdrop,
+    .hero-motif .motif-ring {
+        animation: none !important;
     }
 }

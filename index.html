@@ -113,7 +113,7 @@
 
     <!-- Hero Section -->
     <main id="main">
-    <section id="home" class="hero">
+    <section id="home" class="hero" data-reveal>
         <div class="hero-grid" aria-hidden="true"></div>
         <div class="hero-content">
             <div class="hero-text">
@@ -139,7 +139,7 @@
             </div>
         </div>
         <!-- Scroll Down Indicator -->
-        <div class="scroll-indicator">
+        <div class="scroll-indicator" data-reveal-child>
             <span>Scroll Down</span>
             <div class="scroll-arrow">
                 <i class="fas fa-chevron-down"></i>
@@ -147,22 +147,38 @@
         </div>
     </section>
 
+    <section id="impact" class="impact-section" data-reveal>
+        <div class="impact-backdrop" aria-hidden="true"></div>
+        <div class="impact-content">
+            <p class="impact-kicker" data-reveal-child>Crafted Experiences</p>
+            <h2 class="impact-title" data-reveal-child>Designing interfaces that feel like products, not pages.</h2>
+            <p class="impact-subtitle" data-reveal-child>Minimal, intentional, and engineered for momentum. Built to impress at first glance and convert on the second.</p>
+            <div class="impact-cta" data-reveal-child>
+                <a href="#projects" class="btn magnetic-btn">Explore Featured Work</a>
+                <span class="impact-signature">— Rayen Bahroun</span>
+            </div>
+        </div>
+        <div class="impact-motif" aria-hidden="true">
+            <span></span><span></span><span></span>
+        </div>
+    </section>
+
     <!-- Stats Section -->
-    <section id="stats" class="stats-section">
-        <div class="stats-container">
-            <div class="stat-item">
+    <section id="stats" class="stats-section" data-reveal>
+        <div class="stats-container" data-reveal-child>
+            <div class="stat-item" data-reveal-child>
                 <span class="stat-number" data-target="2">0</span>
                 <span class="stat-label">Years Experience</span>
             </div>
-            <div class="stat-item">
+            <div class="stat-item" data-reveal-child>
                 <span class="stat-number" data-target="15">0</span>
                 <span class="stat-label">Projects Completed</span>
             </div>
-            <div class="stat-item">
+            <div class="stat-item" data-reveal-child>
                 <span class="stat-number" data-target="10">0</span>
                 <span class="stat-label">Happy Clients</span>
             </div>
-            <div class="stat-item">
+            <div class="stat-item" data-reveal-child>
                 <span class="stat-number" data-target="1000">0</span>
                 <span class="stat-label">Lines of Code</span>
                 <span class="stat-suffix">+</span>
@@ -171,12 +187,12 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section">
-        <div class="section-title">
+    <section id="about" class="section" data-reveal>
+        <div class="section-title" data-reveal-child>
             <h2 class="glitch-hover" data-text="About Me">About Me</h2>
         </div>
         <div class="about-content">
-            <div class="about-text">
+            <div class="about-text" data-reveal-child>
                 <h3>Who I Am</h3>
                 <p>I'm a college student with 2 years of experience in web/software development. I specialize in Backend
                     handling and have worked with clients from various industries.</p>
@@ -187,64 +203,64 @@
                 <p>Looks like im always coding 😅</p>
                 <a href="media/cvEnt.pdf" class="btn magnetic-btn">Download Resume</a>
             </div>
-            <div class="about-image">
+            <div class="about-image" data-reveal-child>
                 <img src="media/about-image.webp" width="500" height="500" alt="About Rayen" loading="lazy" decoding="async">
             </div>
         </div>
     </section>
 
     <!-- Tech Stack Section -->
-    <section id="tech-stack" class="section">
-        <div class="section-title">
+    <section id="tech-stack" class="section" data-reveal>
+        <div class="section-title" data-reveal-child>
             <h2 class="glitch-hover" data-text="Tech Stack">Tech Stack</h2>
         </div>
         <div class="tech-pills-container">
-            <div class="tech-pill" data-tooltip="Expert - 3 years">
+            <div class="tech-pill" data-tooltip="Expert - 3 years" data-reveal-child>
                 <i class="fab fa-html5"></i>
                 <span>HTML5</span>
                 <div class="pill-glow"></div>
             </div>
-            <div class="tech-pill" data-tooltip="Expert - 3 years">
+            <div class="tech-pill" data-tooltip="Expert - 3 years" data-reveal-child>
                 <i class="fab fa-css3-alt"></i>
                 <span>CSS3</span>
                 <div class="pill-glow"></div>
             </div>
-            <div class="tech-pill" data-tooltip="Advanced - 2 years">
+            <div class="tech-pill" data-tooltip="Advanced - 2 years" data-reveal-child>
                 <i class="fab fa-js"></i>
                 <span>JavaScript</span>
                 <div class="pill-glow"></div>
             </div>
-            <div class="tech-pill" data-tooltip="Advanced - 2 years">
+            <div class="tech-pill" data-tooltip="Advanced - 2 years" data-reveal-child>
                 <i class="fab fa-python"></i>
                 <span>Python</span>
                 <div class="pill-glow"></div>
             </div>
-            <div class="tech-pill" data-tooltip="Intermediate - 1 year">
+            <div class="tech-pill" data-tooltip="Intermediate - 1 year" data-reveal-child>
                 <i class="fab fa-react"></i>
                 <span>React</span>
                 <div class="pill-glow"></div>
             </div>
-            <div class="tech-pill" data-tooltip="Intermediate - 1 year">
+            <div class="tech-pill" data-tooltip="Intermediate - 1 year" data-reveal-child>
                 <i class="fab fa-node-js"></i>
                 <span>Node.js</span>
                 <div class="pill-glow"></div>
             </div>
-            <div class="tech-pill" data-tooltip="Intermediate - 1 year">
+            <div class="tech-pill" data-tooltip="Intermediate - 1 year" data-reveal-child>
                 <i class="fas fa-database"></i>
                 <span>MongoDB</span>
                 <div class="pill-glow"></div>
             </div>
-            <div class="tech-pill" data-tooltip="Learning">
+            <div class="tech-pill" data-tooltip="Learning" data-reveal-child>
                 <i class="fab fa-docker"></i>
                 <span>Docker</span>
                 <div class="pill-glow"></div>
             </div>
-            <div class="tech-pill" data-tooltip="Advanced - 2 years">
+            <div class="tech-pill" data-tooltip="Advanced - 2 years" data-reveal-child>
                 <i class="fab fa-git-alt"></i>
                 <span>Git</span>
                 <div class="pill-glow"></div>
             </div>
-            <div class="tech-pill" data-tooltip="Intermediate - 1 year">
+            <div class="tech-pill" data-tooltip="Intermediate - 1 year" data-reveal-child>
                 <i class="fas fa-brain"></i>
                 <span>AI/ML</span>
                 <div class="pill-glow"></div>
@@ -253,29 +269,29 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section">
-        <div class="section-title">
+    <section id="skills" class="section" data-reveal>
+        <div class="section-title" data-reveal-child>
             <h2 class="glitch-hover" data-text="My Skills">My Skills</h2>
         </div>
         <div class="skills-container">
-            <div class="skill-card">
+            <div class="skill-card" data-reveal-child>
                 <i class="fas fa-code"></i>
                 <h3>Web Development</h3>
                 <p>Building responsive, accessible websites using modern technologies like HTML5, CSS3, JavaScript, and
                     frameworks.</p>
             </div>
-            <div class="skill-card">
+            <div class="skill-card" data-reveal-child>
                 <i class="fas fa-mobile-alt"></i>
                 <h3>Responsive Design</h3>
                 <p>Creating websites that look great on all devices using mobile-first approaches and flexible layouts.
                 </p>
             </div>
-            <div class="skill-card">
+            <div class="skill-card" data-reveal-child>
                 <i class="fas fa-paint-brush"></i>
                 <h3>UI/UX Design</h3>
                 <p>Designing intuitive user interfaces with a focus on user experience and accessibility principles.</p>
             </div>
-            <div class="skill-card">
+            <div class="skill-card" data-reveal-child>
                 <i class="fas fa-server"></i>
                 <h3>Backend Development</h3>
                 <p>Building server-side applications, APIs, and databases to power modern web applications.</p>
@@ -284,13 +300,13 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="section-title">
+    <section id="projects" class="section" data-reveal>
+        <div class="section-title" data-reveal-child>
             <h2 class="glitch-hover" data-text="My Projects">My Projects</h2>
         </div>
-        <div class="projects-apple">
+        <div class="projects-apple" data-reveal-child>
             <div class="projects-featured">
-                <article class="project-card project-card--featured">
+                <article class="project-card project-card--featured" data-reveal-child>
                     <div class="project-image">
                         <img src="media/apiarm.webp" width="800" height="520" alt="API-ARM Project" loading="lazy" decoding="async">
                     </div>
@@ -308,7 +324,7 @@
                         </div>
                     </div>
                 </article>
-                <article class="project-card project-card--featured">
+                <article class="project-card project-card--featured" data-reveal-child>
                     <div class="project-image">
                         <img src="media/egrab.webp" width="800" height="520" alt="eGrab Project" loading="lazy" decoding="async">
                     </div>
@@ -328,7 +344,7 @@
             </div>
 
             <div class="projects-subgrid">
-                <article class="project-card">
+                <article class="project-card" data-reveal-child>
                     <div class="project-image">
                         <img src="media/csp.webp" width="500" height="333" alt="CSP Project" loading="lazy" decoding="async">
                     </div>
@@ -345,7 +361,7 @@
                         </div>
                     </div>
                 </article>
-                <article class="project-card">
+                <article class="project-card" data-reveal-child>
                     <div class="project-image">
                         <img src="media/project-placeholder.webp" width="500" height="333" alt="Pdf2go Project" loading="lazy" decoding="async">
                     </div>
@@ -362,7 +378,7 @@
                         </div>
                     </div>
                 </article>
-                <article class="project-card">
+                <article class="project-card" data-reveal-child>
                     <div class="project-image">
                         <img src="media/zaama.webp" width="500" height="333" alt="Zaama Project" loading="lazy" decoding="async">
                     </div>
@@ -383,12 +399,12 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="section-title">
+    <section id="contact" class="section" data-reveal>
+        <div class="section-title" data-reveal-child>
             <h2 class="glitch-hover" data-text="Contact Me">Contact Me</h2>
         </div>
         <div class="contact-container">
-            <div class="contact-info">
+            <div class="contact-info" data-reveal-child>
                 <h3>Get In Touch</h3>
                 <div class="contact-details">
                     <p><i class="fas fa-envelope"></i> rayenbahroun999@gmail.com</p>
@@ -405,7 +421,7 @@
                     <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/rayenbhr1/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="contact-form">
+            <div class="contact-form" data-reveal-child>
                 <form id="contactForm">
                     <div class="form-group">
                         <label for="name">Name</label>
