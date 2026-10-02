@@ -4,467 +4,554 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rayen Bahroun — Developer Portfolio</title>
     <meta name="description"
-        content="Rayen Bahroun - Web & Software Developer specializing in Backend Development, UI/UX Design, and Modern Web Technologies. View my portfolio and get in touch.">
-    <meta name="theme-color" content="#8b5cf6">
-    <meta name="author" content="Rayen Bahroun">
-    <meta property="og:image" content="https://bahroun.me/media/final4.png" />
-    <meta property="og:title" content="Rayen Bahroun | Web & Software Developer" />
-    <meta property="og:description" content="Rayen Bahroun - Web & Software Developer specializing in Backend Development, UI/UX Design, and Modern Web Technologies." />
-    <meta property="og:url" content="https://bahroun.me" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Rayen Bahroun | Web & Software Developer" />
-    <meta name="twitter:description" content="Rayen Bahroun - Web & Software Developer specializing in Backend Development, UI/UX Design, and Modern Web Technologies." />
-    <meta name="twitter:image" content="https://bahroun.me/media/final4.png" />
-    <link rel="canonical" href="https://bahroun.me">
-    <title>Rayen Bahroun | Web & Software Developer</title>
-    <link rel="icon" type="image/x-icon" href="/media/image-removebg-preview-_34_.ico">
-
-    <!-- Google Fonts Preconnect -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"></noscript>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="css/styles.css">
-
-    <script type="application/ld+json">
-    {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Rayen Bahroun",
-    "alternateName": ["Rayen", "Bahroun"],
-    "url": "https://bahroun.me",
-    "image": "https://bahroun.me/media/final4.png",
-    "jobTitle": "Creative Developer",
-    "sameAs": [
-        "https://github.com/chkobbaa",
-        "https://www.linkedin.com/in/rayen-bahroun-10427b360",
-        "https://twitter.com/BahrounRay82317"
-    ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "url": "https://bahroun.me",
-      "logo": "https://bahroun.me/media/final4.png"
-    }
-    </script>
-    <!-- Clarity Analytics -->
-    <script type="text/javascript">
-        (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-        })(window, document, "clarity", "script", "uapwovtbgu");
-    </script>
+        content="Rayen Bahroun — Backend developer & creative technologist from Tunisia. Building tools, APIs, and polished digital experiences.">
+    <link rel="icon" href="media/image-removebg-preview-_34_.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <!-- Noise Overlay -->
-    <div class="noise-overlay"></div>
 
-    <!-- Custom Cursor -->
-    <div class="custom-cursor">
-        <div class="cursor-dot"></div>
-        <div class="cursor-ring"></div>
-    </div>
-
-    <!-- Parallax Floating Elements -->
-    <div class="parallax-container">
-        <div class="parallax-shape shape-1"></div>
-        <div class="parallax-shape shape-2"></div>
-        <div class="parallax-shape shape-3"></div>
-        <div class="parallax-shape shape-4"></div>
-        <div class="parallax-shape shape-5"></div>
-    </div>
-
-    <!-- Header -->
-    <header>
-        <nav aria-label="Primary">
-            <div class="logo" data-glitch="RayenBahroun">Rayen<span>Bahroun</span></div>
-            <ul class="nav-links" id="primary-navigation">
-                <li><a href="#home">Home</a></li>
+    <!-- ========== NAV ========== -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <a href="#" class="nav-logo">R<span>.</span>B</a>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li>
-                    <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
-                        <i class="fas fa-moon"></i>
-                        <span>Dark Mode</span>
-                    </button>
-                </li>
             </ul>
-            <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
-                <i class="fas fa-bars"></i>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
             </button>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <!-- Hero Section -->
-    <main id="main">
-    <section id="home" class="hero" data-reveal>
-        <div class="hero-grid" aria-hidden="true"></div>
-        <div class="hero-content">
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="home">
+        <div class="container">
             <div class="hero-text">
-                <div class="signature-badge" aria-hidden="true">
-                    <span class="badge-dot"></span>
-                    Crafted in Tunisia
-                </div>
-                <h1 class="glitch-text" data-text="Oh, Hello There!">Oh, <span class="gradient-text">Hello There!</span>
-                </h1>
-                <p>Here is a passionate student specializing in Web and Software Development. I create beautiful,
-                    functional websites and applications. 👉</p>
-                <div class="hero-motif" aria-hidden="true">
-                    <div class="motif-ring"></div>
-                    <div class="motif-grid"></div>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn magnetic-btn">View My Work</a>
-                    <a href="#contact" class="btn btn-outline magnetic-btn">Contact Me</a>
+                <img src="media/hero-image.webp" alt="Rayen Bahroun" class="hero-avatar" width="80" height="80">
+                <h1 class="hero-name">Rayen<br><span>Bahroun</span></h1>
+                <p class="hero-tagline">Backend Developer & Creative Technologist</p>
+                <p class="hero-sub">Building tools, APIs, and polished digital experiences from Nabeul, Tunisia.</p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn">View Projects</a>
+                    <a href="media/cvEnt.pdf" class="btn btn--outline" target="_blank">Download CV</a>
                 </div>
             </div>
-            <div class="hero-image">
-                <img src="media/hero-image.webp" width="1080" height="1080" alt="Rayen Bahroun" fetchpriority="high" decoding="async">
-            </div>
-        </div>
-        <!-- Scroll Down Indicator -->
-        <div class="scroll-indicator" data-reveal-child>
-            <span>Scroll Down</span>
-            <div class="scroll-arrow">
-                <i class="fas fa-chevron-down"></i>
-            </div>
-        </div>
-    </section>
-
-    <section id="impact" class="impact-section" data-reveal>
-        <div class="impact-backdrop" aria-hidden="true"></div>
-        <div class="impact-content">
-            <p class="impact-kicker" data-reveal-child>Crafted Experiences</p>
-            <h2 class="impact-title" data-reveal-child>Designing interfaces that feel like products, not pages.</h2>
-            <p class="impact-subtitle" data-reveal-child>Minimal, intentional, and engineered for momentum. Built to impress at first glance and convert on the second.</p>
-            <div class="impact-cta" data-reveal-child>
-                <a href="#projects" class="btn magnetic-btn">Explore Featured Work</a>
-                <span class="impact-signature">— Rayen Bahroun</span>
-            </div>
-        </div>
-        <div class="impact-motif" aria-hidden="true">
-            <span></span><span></span><span></span>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section id="stats" class="stats-section" data-reveal>
-        <div class="stats-container" data-reveal-child>
-            <div class="stat-item" data-reveal-child>
-                <span class="stat-number" data-target="2">0</span>
-                <span class="stat-label">Years Experience</span>
-            </div>
-            <div class="stat-item" data-reveal-child>
-                <span class="stat-number" data-target="15">0</span>
-                <span class="stat-label">Projects Completed</span>
-            </div>
-            <div class="stat-item" data-reveal-child>
-                <span class="stat-number" data-target="10">0</span>
-                <span class="stat-label">Happy Clients</span>
-            </div>
-            <div class="stat-item" data-reveal-child>
-                <span class="stat-number" data-target="1000">0</span>
-                <span class="stat-label">Lines of Code</span>
-                <span class="stat-suffix">+</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section" data-reveal>
-        <div class="section-title" data-reveal-child>
-            <h2 class="glitch-hover" data-text="About Me">About Me</h2>
-        </div>
-        <div class="about-content">
-            <div class="about-text" data-reveal-child>
-                <h3>Who I Am</h3>
-                <p>I'm a college student with 2 years of experience in web/software development. I specialize in Backend
-                    handling and have worked with clients from various industries.</p>
-                <p>My approach combines technical expertise with creative problem-solving to deliver solutions that are
-                    both functional and visually appealing.</p>
-                <p>When I'm not coding, you can find me at <span style="color: #ec4899;">*ERROR 404, NOT FOUND*</span>.
-                </p>
-                <p>Looks like im always coding 😅</p>
-                <a href="media/cvEnt.pdf" class="btn magnetic-btn">Download Resume</a>
-            </div>
-            <div class="about-image" data-reveal-child>
-                <img src="media/about-image.webp" width="500" height="500" alt="About Rayen" loading="lazy" decoding="async">
-            </div>
-        </div>
-    </section>
-
-    <!-- Tech Stack Section -->
-    <section id="tech-stack" class="section" data-reveal>
-        <div class="section-title" data-reveal-child>
-            <h2 class="glitch-hover" data-text="Tech Stack">Tech Stack</h2>
-        </div>
-        <div class="tech-pills-container">
-            <div class="tech-pill" data-tooltip="Expert - 3 years" data-reveal-child>
-                <i class="fab fa-html5"></i>
-                <span>HTML5</span>
-                <div class="pill-glow"></div>
-            </div>
-            <div class="tech-pill" data-tooltip="Expert - 3 years" data-reveal-child>
-                <i class="fab fa-css3-alt"></i>
-                <span>CSS3</span>
-                <div class="pill-glow"></div>
-            </div>
-            <div class="tech-pill" data-tooltip="Advanced - 2 years" data-reveal-child>
-                <i class="fab fa-js"></i>
-                <span>JavaScript</span>
-                <div class="pill-glow"></div>
-            </div>
-            <div class="tech-pill" data-tooltip="Advanced - 2 years" data-reveal-child>
-                <i class="fab fa-python"></i>
-                <span>Python</span>
-                <div class="pill-glow"></div>
-            </div>
-            <div class="tech-pill" data-tooltip="Intermediate - 1 year" data-reveal-child>
-                <i class="fab fa-react"></i>
-                <span>React</span>
-                <div class="pill-glow"></div>
-            </div>
-            <div class="tech-pill" data-tooltip="Intermediate - 1 year" data-reveal-child>
-                <i class="fab fa-node-js"></i>
-                <span>Node.js</span>
-                <div class="pill-glow"></div>
-            </div>
-            <div class="tech-pill" data-tooltip="Intermediate - 1 year" data-reveal-child>
-                <i class="fas fa-database"></i>
-                <span>MongoDB</span>
-                <div class="pill-glow"></div>
-            </div>
-            <div class="tech-pill" data-tooltip="Learning" data-reveal-child>
-                <i class="fab fa-docker"></i>
-                <span>Docker</span>
-                <div class="pill-glow"></div>
-            </div>
-            <div class="tech-pill" data-tooltip="Advanced - 2 years" data-reveal-child>
-                <i class="fab fa-git-alt"></i>
-                <span>Git</span>
-                <div class="pill-glow"></div>
-            </div>
-            <div class="tech-pill" data-tooltip="Intermediate - 1 year" data-reveal-child>
-                <i class="fas fa-brain"></i>
-                <span>AI/ML</span>
-                <div class="pill-glow"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section" data-reveal>
-        <div class="section-title" data-reveal-child>
-            <h2 class="glitch-hover" data-text="My Skills">My Skills</h2>
-        </div>
-        <div class="skills-container">
-            <div class="skill-card" data-reveal-child>
-                <i class="fas fa-code"></i>
-                <h3>Web Development</h3>
-                <p>Building responsive, accessible websites using modern technologies like HTML5, CSS3, JavaScript, and
-                    frameworks.</p>
-            </div>
-            <div class="skill-card" data-reveal-child>
-                <i class="fas fa-mobile-alt"></i>
-                <h3>Responsive Design</h3>
-                <p>Creating websites that look great on all devices using mobile-first approaches and flexible layouts.
-                </p>
-            </div>
-            <div class="skill-card" data-reveal-child>
-                <i class="fas fa-paint-brush"></i>
-                <h3>UI/UX Design</h3>
-                <p>Designing intuitive user interfaces with a focus on user experience and accessibility principles.</p>
-            </div>
-            <div class="skill-card" data-reveal-child>
-                <i class="fas fa-server"></i>
-                <h3>Backend Development</h3>
-                <p>Building server-side applications, APIs, and databases to power modern web applications.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section" data-reveal>
-        <div class="section-title" data-reveal-child>
-            <h2 class="glitch-hover" data-text="My Projects">My Projects</h2>
-        </div>
-        <div class="projects-apple" data-reveal-child>
-            <div class="projects-featured">
-                <article class="project-card project-card--featured" data-reveal-child>
-                    <div class="project-image">
-                        <img src="media/apiarm.webp" width="800" height="520" alt="API-ARM Project" loading="lazy" decoding="async">
-                    </div>
-                    <div class="project-info">
-                        <div class="project-meta">
-                            <span class="pill">Featured</span>
-                            <span class="pill">Python</span>
-                            <span class="pill">API</span>
-                        </div>
-                        <h3>API-ARM</h3>
-                        <p>Automated request intelligence for APIs. It profiles endpoints and crafts secure, human-like calls that return expected results.</p>
-                        <div class="project-links">
-                            <a href="https://pypi.org/project/apiarm/" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="https://github.com/chkobbaa/apiarm" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="project-card project-card--featured" data-reveal-child>
-                    <div class="project-image">
-                        <img src="media/egrab.webp" width="800" height="520" alt="eGrab Project" loading="lazy" decoding="async">
-                    </div>
-                    <div class="project-info">
-                        <div class="project-meta">
-                            <span class="pill">Featured</span>
-                            <span class="pill">Extension</span>
-                            <span class="pill">Productivity</span>
-                        </div>
-                        <h3>eGrab</h3>
-                        <p>Visually grab any webpage element and copy it as complete HTML, CSS, and JS — exactly as it appears.</p>
-                        <div class="project-links">
-                            <a href="https://egrab.bahroun.me" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-
-            <div class="projects-subgrid">
-                <article class="project-card" data-reveal-child>
-                    <div class="project-image">
-                        <img src="media/csp.webp" width="500" height="333" alt="CSP Project" loading="lazy" decoding="async">
-                    </div>
-                    <div class="project-info">
-                        <div class="project-meta">
-                            <span class="pill">AI</span>
-                            <span class="pill">Desktop</span>
-                        </div>
-                        <h3>CSP</h3>
-                        <p>An AI powered app that allows the user to communicate with any AI model anywhere in their PC.</p>
-                        <div class="project-links">
-                            <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#"><i class="fab fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="project-card" data-reveal-child>
-                    <div class="project-image">
-                        <img src="media/project-placeholder.webp" width="500" height="333" alt="Pdf2go Project" loading="lazy" decoding="async">
-                    </div>
-                    <div class="project-info">
-                        <div class="project-meta">
-                            <span class="pill">AI</span>
-                            <span class="pill">Docs</span>
-                        </div>
-                        <h3>Pdf2go</h3>
-                        <p>AI powered PDF document generator with contextual prompts and built‑in web search for accurate results.</p>
-                        <div class="project-links">
-                            <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#"><i class="fab fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="project-card" data-reveal-child>
-                    <div class="project-image">
-                        <img src="media/zaama.webp" width="500" height="333" alt="Zaama Project" loading="lazy" decoding="async">
-                    </div>
-                    <div class="project-info">
-                        <div class="project-meta">
-                            <span class="pill">Web</span>
-                            <span class="pill">Landing</span>
-                        </div>
-                        <h3>Zaama</h3>
-                        <p>A web project hosted at zaama.bahroun.me</p>
-                        <div class="project-links">
-                            <a href="https://zaama.bahroun.me" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section" data-reveal>
-        <div class="section-title" data-reveal-child>
-            <h2 class="glitch-hover" data-text="Contact Me">Contact Me</h2>
-        </div>
-        <div class="contact-container">
-            <div class="contact-info" data-reveal-child>
-                <h3>Get In Touch</h3>
-                <div class="contact-details">
-                    <p><i class="fas fa-envelope"></i> rayenbahroun999@gmail.com</p>
-                    <p><i class="fas fa-phone"></i> (+216) 54 504 841</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Nabeul, Tunisia <img style="margin: 3px 0 0 10px;"
-                            src="media/tunisia-flag.webp" width="20" height="20" height="20" alt="Tunisia" loading="lazy" decoding="async"></p>
-                </div>
-                <h3>Follow Me</h3>
-                <div class="social-links">
-                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/chkobbaa" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/rayen-bahroun-10427b360/" aria-label="LinkedIn"><i
-                            class="fab fa-linkedin-in"></i></a>
-                    <a target="_blank" rel="noopener noreferrer" href="https://x.com/BahrounRay82317" aria-label="X"><i class="fab fa-twitter"></i></a>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/rayenbhr1/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <div class="hero-scene">
+                <div class="hero-frame">
+                    <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg"
+                        aria-label="Coastal minimalist illustration">
+                        <rect width="800" height="600" fill="#A8DADC" />
+                        <g class="svg-float-a">
+                            <circle cx="620" cy="160" r="90" fill="#F4A261" stroke="#1A1A1A" stroke-width="3" />
+                            <rect x="530" y="195" width="180" height="6" fill="#A8DADC" />
+                            <rect x="530" y="215" width="180" height="9" fill="#A8DADC" />
+                            <rect x="530" y="238" width="180" height="14" fill="#A8DADC" />
+                        </g>
+                        <g class="svg-float-c">
+                            <rect x="80" y="70" width="100" height="30" fill="#F5EFE6" stroke="#1A1A1A"
+                                stroke-width="3" />
+                            <rect x="110" y="45" width="60" height="28" fill="#F5EFE6" stroke="#1A1A1A"
+                                stroke-width="3" />
+                        </g>
+                        <g class="svg-float-b">
+                            <rect x="440" y="55" width="70" height="22" fill="#F5EFE6" stroke="#1A1A1A"
+                                stroke-width="3" />
+                        </g>
+                        <rect x="0" y="310" width="800" height="140" fill="#2A9D8F" stroke="#1A1A1A"
+                            stroke-width="3" />
+                        <line x1="60" y1="355" x2="140" y2="355" stroke="#A8DADC" stroke-width="3" />
+                        <line x1="250" y1="385" x2="380" y2="385" stroke="#A8DADC" stroke-width="3" />
+                        <line x1="500" y1="365" x2="620" y2="365" stroke="#A8DADC" stroke-width="3" />
+                        <line x1="680" y1="340" x2="760" y2="340" stroke="#A8DADC" stroke-width="3" />
+                        <rect x="0" y="450" width="800" height="150" fill="#F5EFE6" stroke="#1A1A1A"
+                            stroke-width="3" />
+                        <g>
+                            <rect x="60" y="280" width="280" height="170" fill="#F5EFE6" stroke="#1A1A1A"
+                                stroke-width="3" />
+                            <polygon points="340,280 358,296 358,466 340,450" fill="#1A1A1A" />
+                            <rect x="40" y="262" width="318" height="18" fill="#F4A261" stroke="#1A1A1A"
+                                stroke-width="3" />
+                            <rect x="40" y="280" width="300" height="8" fill="#1A1A1A" opacity="0.15" />
+                            <rect x="120" y="340" width="60" height="110" fill="#2A9D8F" stroke="#1A1A1A"
+                                stroke-width="3" />
+                            <circle cx="165" cy="400" r="4" fill="#F4A261" stroke="#1A1A1A" stroke-width="2" />
+                            <rect x="230" y="310" width="70" height="60" fill="#A8DADC" stroke="#1A1A1A"
+                                stroke-width="3" />
+                            <line x1="265" y1="310" x2="265" y2="370" stroke="#1A1A1A" stroke-width="2" />
+                            <line x1="230" y1="340" x2="300" y2="340" stroke="#1A1A1A" stroke-width="2" />
+                            <polygon points="232,312 248,312 236,366 232,366" fill="#F5EFE6" opacity="0.5" />
+                            <rect x="90" y="300" width="35" height="35" fill="#A8DADC" stroke="#1A1A1A"
+                                stroke-width="3" />
+                            <line x1="107" y1="300" x2="107" y2="335" stroke="#1A1A1A" stroke-width="2" />
+                        </g>
+                        <polygon points="440,478 720,478 690,540 410,540" fill="#A8DADC" stroke="#1A1A1A"
+                            stroke-width="3" />
+                        <polygon points="450,488 710,488 704,496 444,496" fill="#2A9D8F" opacity="0.5" />
+                        <rect x="380" y="505" width="50" height="10" fill="#F4A261" stroke="#1A1A1A"
+                            stroke-width="3" />
+                        <rect x="370" y="498" width="10" height="24" fill="#1A1A1A" />
+                        <g class="svg-float-b">
+                            <rect x="560" y="250" width="10" height="200" fill="#F4A261" stroke="#1A1A1A"
+                                stroke-width="3" />
+                            <polygon points="565,250 510,200 530,260" fill="#2A9D8F" stroke="#1A1A1A"
+                                stroke-width="3" />
+                            <polygon points="565,250 620,200 600,260" fill="#2A9D8F" stroke="#1A1A1A"
+                                stroke-width="3" />
+                            <polygon points="565,250 520,170 550,230" fill="#2A9D8F" stroke="#1A1A1A"
+                                stroke-width="3" />
+                            <polygon points="565,250 610,170 580,230" fill="#2A9D8F" stroke="#1A1A1A"
+                                stroke-width="3" />
+                        </g>
+                        <g class="svg-float-a">
+                            <rect x="690" y="140" width="18" height="340" fill="#F4A261" stroke="#1A1A1A"
+                                stroke-width="3" />
+                            <rect x="708" y="140" width="10" height="340" fill="#1A1A1A" opacity="0.25" />
+                            <polygon points="699,140 600,75 640,155" fill="#2A9D8F" stroke="#1A1A1A" stroke-width="3" />
+                            <polygon points="699,140 795,75 760,155" fill="#2A9D8F" stroke="#1A1A1A" stroke-width="3" />
+                            <polygon points="699,140 620,20 665,100" fill="#2A9D8F" stroke="#1A1A1A" stroke-width="3" />
+                            <polygon points="699,140 780,20 735,100" fill="#2A9D8F" stroke="#1A1A1A" stroke-width="3" />
+                            <polygon points="699,140 560,180 645,190" fill="#2A9D8F" stroke="#1A1A1A"
+                                stroke-width="3" />
+                        </g>
+                        <circle cx="370" cy="445" r="18" fill="#2A9D8F" stroke="#1A1A1A" stroke-width="3" />
+                        <circle cx="390" cy="440" r="14" fill="#2A9D8F" stroke="#1A1A1A" stroke-width="3" />
+                    </svg>
                 </div>
             </div>
-            <div class="contact-form" data-reveal-child>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" autocomplete="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" autocomplete="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" autocomplete="off" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" autocomplete="off" required></textarea>
-                    </div>
-                    <button type="submit" class="btn magnetic-btn">Send Message</button>
-                </form>
+        </div>
+        <svg class="deco deco--bl" width="100" height="100" viewBox="0 0 100 100" fill="none">
+            <rect x="10" y="60" width="24" height="24" fill="#A8DADC" stroke="#1A1A1A" stroke-width="2" />
+            <rect x="50" y="40" width="16" height="16" fill="#F4A261" stroke="#1A1A1A" stroke-width="2" />
+            <circle cx="80" cy="80" r="10" fill="#2A9D8F" stroke="#1A1A1A" stroke-width="2" />
+        </svg>
+    </section>
+
+    <!-- ========== SYSTEM PIPELINE DIAGRAM (NEW) ========== -->
+    <section class="pipeline-section animated-dots" id="pipeline">
+        <div class="pipeline-header">
+            <h2>How I <span>Build</span></h2>
+            <p>Data flows through every layer — from input to output</p>
+        </div>
+        <div class="pipeline reveal">
+            <div class="pipeline-node" style="--i:0">
+                <span class="pipeline-node-icon"><i class="fas fa-arrow-right-to-bracket"></i></span>
+                <span class="pipeline-node-label">Input</span>
+            </div>
+            <div class="pipeline-conn"><span class="pipeline-dash"></span><span class="pipeline-arrow">▸</span></div>
+            <div class="pipeline-node" style="--i:1">
+                <span class="pipeline-node-icon"><i class="fas fa-microchip"></i></span>
+                <span class="pipeline-node-label">Compute</span>
+            </div>
+            <div class="pipeline-conn"><span class="pipeline-dash"></span><span class="pipeline-arrow">▸</span></div>
+            <div class="pipeline-node" style="--i:2">
+                <span class="pipeline-node-icon"><i class="fas fa-brain"></i></span>
+                <span class="pipeline-node-label">AI</span>
+            </div>
+            <div class="pipeline-conn"><span class="pipeline-dash"></span><span class="pipeline-arrow">▸</span></div>
+            <div class="pipeline-node" style="--i:3">
+                <span class="pipeline-node-icon"><i class="fas fa-database"></i></span>
+                <span class="pipeline-node-label">Storage</span>
+            </div>
+            <div class="pipeline-conn"><span class="pipeline-dash"></span><span class="pipeline-arrow">▸</span></div>
+            <div class="pipeline-node" style="--i:4">
+                <span class="pipeline-node-icon"><i class="fas fa-display"></i></span>
+                <span class="pipeline-node-label">Output</span>
             </div>
         </div>
     </section>
-    </main>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; <span id="year"></span> Rayen Bahroun. All rights reserved.</p>
+    <!-- ========== STATS ========== -->
+    <section class="stats animated-dots" id="stats">
+        <div class="container">
+            <div class="stats-grid reveal">
+                <div class="stat-item reveal-child">
+                    <span class="stat-number" data-target="2">0</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item reveal-child">
+                    <span class="stat-number" data-target="15">0</span>
+                    <span class="stat-label">Projects Completed</span>
+                </div>
+                <div class="stat-item reveal-child">
+                    <span class="stat-number" data-target="10">0</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+                <div class="stat-item reveal-child">
+                    <span class="stat-number" data-target="1000">0</span>
+                    <span class="stat-suffix">+</span>
+                    <span class="stat-label">Lines of Code</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <svg class="wave-sep" viewBox="0 0 1440 40" preserveAspectRatio="none">
+        <path d="M0,20 Q360,0 720,20 T1440,20 L1440,40 L0,40 Z" fill="#F5EFE6" />
+    </svg>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about" class="pattern-dots">
+        <div class="container">
+            <h2 class="section-label reveal">About Me</h2>
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <h3 class="reveal-child">Who I Am</h3>
+                    <p class="reveal-child">I'm a college student with 2 years of experience in web and software
+                        development. I specialize in backend handling and have worked with clients from various
+                        industries.</p>
+                    <p class="reveal-child">My approach combines technical expertise with creative problem-solving to
+                        deliver solutions that are both functional and visually appealing.</p>
+                    <div class="fun-line reveal-child">
+                        <span>When I'm not coding, you can find me at</span><br>
+                        <strong style="color: var(--accent);">*ERROR 404, NOT FOUND*</strong><br>
+                        <span>Looks like I'm always coding 😅</span>
+                    </div>
+                    <a href="media/cvEnt.pdf" class="btn btn--secondary reveal-child" target="_blank">Download
+                        Resume</a>
+                </div>
+                <div class="about-image-wrap reveal">
+                    <img src="media/about-image.webp" alt="Rayen Bahroun" width="500" height="500" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <svg class="deco deco--tr" width="140" height="140" viewBox="0 0 140 140" fill="none">
+            <rect x="90" y="10" width="30" height="30" fill="#A8DADC" stroke="#1A1A1A" stroke-width="2" />
+            <rect x="60" y="50" width="20" height="20" fill="#F4A261" stroke="#1A1A1A" stroke-width="2" />
+            <rect x="100" y="70" width="25" height="25" transform="rotate(45 112 82)" fill="#2A9D8F" stroke="#1A1A1A"
+                stroke-width="2" />
+            <circle cx="50" cy="100" r="8" fill="#F4A261" stroke="#1A1A1A" stroke-width="2" />
+        </svg>
+    </section>
+
+    <!-- ========== TECH STACK ========== -->
+    <section class="tech-stack pattern-diag" id="tech">
+        <div class="container">
+            <h2 class="section-label reveal">Tech Stack</h2>
+            <div class="tech-pills reveal">
+                <span class="tech-pill reveal-child">HTML5</span>
+                <span class="tech-pill reveal-child">CSS3</span>
+                <span class="tech-pill reveal-child">JavaScript</span>
+                <span class="tech-pill reveal-child">Python</span>
+                <span class="tech-pill reveal-child">React</span>
+                <span class="tech-pill reveal-child">Node.js</span>
+                <span class="tech-pill reveal-child">MongoDB</span>
+                <span class="tech-pill reveal-child">Docker</span>
+                <span class="tech-pill reveal-child">Git</span>
+                <span class="tech-pill reveal-child">AI / ML</span>
+            </div>
+        </div>
+    </section>
+
+    <svg class="wave-sep" viewBox="0 0 1440 40" preserveAspectRatio="none">
+        <path d="M0,20 Q360,40 720,20 T1440,20 L1440,40 L0,40 Z" fill="#F5EFE6" />
+    </svg>
+
+    <!-- ========== SKILLS ========== -->
+    <section id="skills" class="pattern-grid">
+        <div class="container">
+            <h2 class="section-label reveal">My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card reveal">
+                    <div class="skill-icon"><i class="fas fa-code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>Building responsive, accessible websites using modern technologies like HTML5, CSS3, JavaScript,
+                        and frameworks.</p>
+                </div>
+                <div class="skill-card reveal">
+                    <div class="skill-icon skill-icon--teal"><i class="fas fa-server"></i></div>
+                    <h3>Backend Development</h3>
+                    <p>Building server-side applications, APIs, and databases to power modern web applications.</p>
+                </div>
+                <div class="skill-card reveal">
+                    <div class="skill-icon skill-icon--blue"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Responsive Design</h3>
+                    <p>Creating websites that look great on all devices using mobile-first approaches and flexible
+                        layouts.</p>
+                </div>
+                <div class="skill-card reveal">
+                    <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>UI / UX Design</h3>
+                    <p>Designing intuitive user interfaces with a focus on user experience and accessibility principles.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <svg class="deco deco--tl" width="100" height="100" viewBox="0 0 100 100" fill="none">
+            <circle cx="20" cy="20" r="10" fill="#A8DADC" stroke="#1A1A1A" stroke-width="2" />
+            <rect x="50" y="10" width="16" height="16" fill="#F4A261" stroke="#1A1A1A" stroke-width="2" />
+            <polygon points="30,70 42,50 18,50" fill="#2A9D8F" stroke="#1A1A1A" stroke-width="2" />
+        </svg>
+    </section>
+
+    <!-- ========== PROJECTS WITH TABS (ENHANCED) ========== -->
+    <section id="projects" class="pattern-dots">
+        <div class="container">
+            <h2 class="section-label reveal">My Work</h2>
+
+            <div class="tabs-bar reveal">
+                <button class="tab-btn active" data-tab="tab-projects">Projects</button>
+                <button class="tab-btn" data-tab="tab-systems">Systems</button>
+                <button class="tab-btn" data-tab="tab-experiments">Experiments</button>
+            </div>
+
+            <!-- TAB: Projects -->
+            <div class="tab-panel active" id="tab-projects">
+                <div class="projects-grid">
+                    <div class="project-card reveal">
+                        <div class="project-thumb">
+                            <img src="media/apiarm.webp" alt="API-ARM" width="800" height="520" loading="lazy">
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags">
+                                <span class="tag tag--featured">Featured</span>
+                                <span class="tag">Python</span>
+                                <span class="tag">API</span>
+                            </div>
+                            <h3>API-ARM</h3>
+                            <p>Automated request intelligence for APIs. It profiles endpoints and crafts secure,
+                                human-like calls that return expected results.</p>
+                            <div class="project-links">
+                                <a href="https://pypi.org/project/apiarm/" target="_blank" rel="noopener noreferrer"
+                                    class="btn btn--small">Live →</a>
+                                <a href="https://github.com/chkobbaa/apiarm" target="_blank" rel="noopener noreferrer"
+                                    class="btn btn--small btn--outline">Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card reveal">
+                        <div class="project-thumb">
+                            <img src="media/egrab.webp" alt="eGrab" width="800" height="520" loading="lazy">
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags">
+                                <span class="tag tag--featured">Featured</span>
+                                <span class="tag">Extension</span>
+                                <span class="tag">Productivity</span>
+                            </div>
+                            <h3>eGrab</h3>
+                            <p>Visually grab any webpage element and copy it as complete HTML, CSS, and JS — exactly as
+                                it appears.</p>
+                            <div class="project-links">
+                                <a href="https://egrab.bahroun.me" target="_blank" rel="noopener noreferrer"
+                                    class="btn btn--small">Live →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card reveal">
+                        <div class="project-thumb">
+                            <img src="media/csp.webp" alt="CSP" width="500" height="333" loading="lazy">
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="tag">AI</span><span class="tag">Desktop</span></div>
+                            <h3>CSP</h3>
+                            <p>An AI powered app that allows the user to communicate with any AI model anywhere on their
+                                PC.</p>
+                            <div class="project-links">
+                                <a href="#" class="btn btn--small btn--outline">Coming Soon</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card reveal">
+                        <div class="project-thumb">
+                            <img src="media/project-placeholder.webp" alt="Pdf2go" width="500" height="333"
+                                loading="lazy">
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="tag">AI</span><span class="tag">Docs</span></div>
+                            <h3>Pdf2go</h3>
+                            <p>AI powered PDF document generator with contextual prompts and built-in web search for
+                                accurate results.</p>
+                            <div class="project-links">
+                                <a href="#" class="btn btn--small btn--outline">Coming Soon</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card reveal">
+                        <div class="project-thumb">
+                            <img src="media/zaama.webp" alt="Zaama" width="500" height="333" loading="lazy">
+                        </div>
+                        <div class="project-body">
+                            <div class="project-tags"><span class="tag">Web</span><span class="tag">Landing</span>
+                            </div>
+                            <h3>Zaama</h3>
+                            <p>A beautifully designed web landing page with attention to detail and smooth interactions.
+                            </p>
+                            <div class="project-links">
+                                <a href="https://zaama.bahroun.me" target="_blank" rel="noopener noreferrer"
+                                    class="btn btn--small">Live →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: Systems -->
+            <div class="tab-panel" id="tab-systems">
+                <div class="info-cards">
+                    <div class="info-card reveal">
+                        <div class="info-card-icon info-card-icon--accent"><i class="fas fa-sitemap"></i></div>
+                        <h3>API Architecture</h3>
+                        <p>RESTful design patterns with rate limiting, input validation, and security headers. Endpoints
+                            are profiled for expected behavior and tested under load.</p>
+                    </div>
+                    <div class="info-card reveal">
+                        <div class="info-card-icon info-card-icon--teal"><i class="fas fa-arrows-spin"></i></div>
+                        <h3>Data Pipelines</h3>
+                        <p>Multi-stage processing flows — from raw input ingestion through AI enrichment to structured
+                            storage. Built for reliability and observability.</p>
+                    </div>
+                    <div class="info-card reveal">
+                        <div class="info-card-icon info-card-icon--blue"><i class="fas fa-ship"></i></div>
+                        <h3>Deployment</h3>
+                        <p>Containerized services with Docker, automated CI/CD workflows, and zero-downtime deployments
+                            across Vercel, Railway, and bare VPS.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: Experiments -->
+            <div class="tab-panel" id="tab-experiments">
+                <div class="info-cards">
+                    <div class="info-card reveal">
+                        <div class="info-card-icon info-card-icon--teal"><i class="fas fa-robot"></i></div>
+                        <h3>AI Integration</h3>
+                        <p>Exploring multi-model AI pipelines — Gemini, GPT, and local LLMs — for document generation,
+                            image analysis, and conversational agents.</p>
+                    </div>
+                    <div class="info-card reveal">
+                        <div class="info-card-icon info-card-icon--accent"><i class="fas fa-puzzle-piece"></i></div>
+                        <h3>Browser Extensions</h3>
+                        <p>Pushing the boundaries of what browser extensions can do — from DOM manipulation to
+                            intercepting network requests and injecting UI overlays.</p>
+                    </div>
+                    <div class="info-card reveal">
+                        <div class="info-card-icon info-card-icon--blue"><i class="fas fa-gauge-high"></i></div>
+                        <h3>Performance</h3>
+                        <p>Experimenting with sub-second load times, aggressive caching strategies, and edge-first
+                            architectures for static and dynamic content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <svg class="deco deco--br" width="130" height="130" viewBox="0 0 130 130" fill="none">
+            <rect x="80" y="20" width="30" height="30" transform="rotate(15 95 35)" fill="#A8DADC" stroke="#1A1A1A"
+                stroke-width="2" />
+            <circle cx="40" cy="90" r="16" fill="#F4A261" stroke="#1A1A1A" stroke-width="2" />
+            <polygon points="110,100 125,75 95,75" fill="#2A9D8F" stroke="#1A1A1A" stroke-width="2" />
+        </svg>
+    </section>
+
+    <!-- ========== NETWORK VISUAL (NEW) ========== -->
+    <section class="network-section" id="network">
+        <div class="network-canvas-wrap">
+            <canvas id="networkCanvas"></canvas>
+        </div>
+        <div class="network-overlay">
+            <h2 class="reveal">Connected <span>Infrastructure</span></h2>
+            <p class="reveal">Systems designed to work together — from edge to origin</p>
+            <div class="network-stats reveal">
+                <div class="network-stat">
+                    <span class="network-stat-val">5+</span>
+                    <span class="network-stat-lbl">Platforms</span>
+                </div>
+                <div class="network-stat">
+                    <span class="network-stat-val">99.9%</span>
+                    <span class="network-stat-lbl">Uptime</span>
+                </div>
+                <div class="network-stat">
+                    <span class="network-stat-val">&lt;200ms</span>
+                    <span class="network-stat-lbl">Avg Response</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-label reveal">Contact Me</h2>
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-envelope"
+                                style="color: var(--accent); margin-right: 10px;"></i>rayen@bahroun.com</p>
+                        <p><i class="fas fa-phone" style="color: var(--secondary); margin-right: 10px;"></i>(+216) 54
+                            504 841</p>
+                        <p><i class="fas fa-map-marker-alt"
+                                style="color: var(--accent); margin-right: 10px;"></i>Nabeul, Tunisia 🇹🇳</p>
+                    </div>
+                    <h3 style="margin-top: 32px;">Follow Me</h3>
+                    <div class="social-row">
+                        <a href="https://github.com/chkobbaa" target="_blank" rel="noopener noreferrer"
+                            class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/rayen-bahroun-10427b360/" target="_blank"
+                            rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="https://x.com/BahrounRay82317" target="_blank" rel="noopener noreferrer"
+                            class="social-link" aria-label="X / Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/rayenbhr1/" target="_blank" rel="noopener noreferrer"
+                            class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form reveal">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" autocomplete="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" autocomplete="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" autocomplete="off" required></textarea>
+                        </div>
+                        <button type="submit" class="btn" id="submitBtn">Send Message</button>
+                    </form>
+                    <div class="form-success" id="formSuccess">
+                        <h3>Message Sent ✓</h3>
+                        <p>Thank you! I'll get back to you shortly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <svg class="deco" style="bottom: 0; left: 0; width: 100%; opacity: 0.12;" viewBox="0 0 1440 80"
+            preserveAspectRatio="none" fill="none">
+            <polygon points="0,80 200,30 350,50 500,20 650,55 800,15 950,45 1100,25 1250,50 1440,10 1440,80"
+                fill="#2A9D8F" stroke="#1A1A1A" stroke-width="2" />
+            <polygon points="0,80 150,50 300,65 500,40 700,60 900,35 1100,55 1300,40 1440,50 1440,80"
+                fill="#1A1A1A" />
+        </svg>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Rayen Bahroun. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://github.com/chkobbaa" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/rayen-bahroun-10427b360/" target="_blank"
+                    rel="noopener noreferrer">LinkedIn</a>
+                <a href="mailto:rayen@bahroun.com">Email</a>
+            </div>
+        </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script src="js/script.js" defer></script>
+    <div class="toast" id="toast"></div>
+    <script src="js/script.js"></script>
 </body>
 
-
 </html>
-
-
-
-
-
-
-
-
-
-
-

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forbidden Developer Portal™</title>
+  <style>
+    :root {
+      --bg: #07111b;
+      --panel: rgba(15, 23, 42, 0.92);
+      --panel-border: rgba(148, 163, 184, 0.35);
+      --text: #e6eef9;
+      --muted: #a9b7ce;
+      --accent: #7dd3fc;
+      --accent-2: #fbbf24;
+      --danger: #f87171;
+      --ok: #34d399;
+      --shadow: rgba(15, 118, 110, 0.24);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(125, 211, 252, 0.16), transparent 30%),
+        linear-gradient(180deg, #020812 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      padding: 32px 18px;
+    }
+
+    .portal {
+      width: min(760px, 100%);
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 24px;
+      box-shadow: 0 30px 90px var(--shadow);
+      overflow: hidden;
+    }
+
+    .progress-wrap {
+      padding: 18px 20px 0;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      height: 12px;
+      background: rgba(148, 163, 184, 0.16);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar > span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: inherit;
+      transition: width 180ms ease;
+    }
+
+    .content {
+      padding: 32px 28px 24px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(1.8rem, 2.6vw, 2.8rem);
+      line-height: 1.12;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.02rem;
+      margin: 0 0 18px;
+      line-height: 1.7;
+    }
+
+    .riddle {
+      border: 1px solid rgba(125, 211, 252, 0.25);
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.7);
+      padding: 18px 18px 14px;
+      margin: 22px 0;
+    }
+
+    .riddle strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      color: var(--accent-2);
+      text-transform: uppercase;
+    }
+
+    .riddle p {
+      margin: 0;
+      color: var(--text);
+      font-size: 1.02rem;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    form {
+      margin-top: 22px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    input[type="text"] {
+      flex: 1 1 260px;
+      min-width: 0;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.16);
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--accent), #22d3ee);
+      color: #051821;
+      border: 0;
+      border-radius: 12px;
+      font-weight: 700;
+      padding: 14px 20px;
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 120ms ease, filter 120ms ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+    }
+
+    .status {
+      min-height: 1.5em;
+      margin-top: 12px;
+      color: var(--danger);
+      font-size: 0.94rem;
+      opacity: 0;
+      transition: opacity 180ms ease;
+    }
+
+    .status.show {
+      opacity: 1;
+    }
+
+    .meta-note {
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 18px;
+    }
+
+    .final-message {
+      color: var(--text);
+      font-size: 1.02rem;
+      line-height: 1.8;
+      white-space: pre-line;
+      margin: 0;
+    }
+
+    .final-message strong {
+      color: var(--danger);
+    }
+
+    @media (max-width: 520px) {
+      .content { padding: 24px 18px 18px; }
+      .input-row { display: block; }
+      button { width: 100%; margin-top: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="portal" aria-live="polite">
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span>Verification</span>
+        <span id="progressLabel">0%</span>
+      </div>
+      <div class="progress-bar" aria-hidden="true"><span id="progressFill"></span></div>
+    </div>
+    <div class="content" id="app"></div>
+  </main>
+
+  <script>
+    const app = document.getElementById('app');
+    const fill = document.getElementById('progressFill');
+    const label = document.getElementById('progressLabel');
+
+    function setProgress(percent) {
+      fill.style.width = percent + '%';
+      label.textContent = percent + '%';
+    }
+
+    function normalizePath(value) {
+      const path = (value || '/').replace(/\\/g, '/');
+      if (!path.startsWith('/')) return '/' + path;
+      return path.replace(/\/+$/, '') || '/';
+    }
+
+    function isSuspiciousPath(path) {
+      const p = normalizePath(path).toLowerCase();
+      const list = [
+        '/login',
+        '/.env',
+        '/.git/config',
+        '/wp-admin',
+        '/wp-login.php',
+        '/phpmyadmin',
+        '/admin'
+      ];
+      return list.includes(p) || p.startsWith('/admin/') || p.startsWith('/wp-admin/');
+    }
+
+    function stageFromPath(path) {
+      const p = normalizePath(path);
+
+      if (isSuspiciousPath(p)) return 'portal';
+      if (p === '/secret/keyboard') return 'level2';
+      if (p === '/secret/keyboard/d') return 'level3';
+      if (p === '/secret/keyboard/d/c') return 'level4';
+      if (p === '/secret/keyboard/d/c/42' || p === '/secret/keyboard/d/c/42/nice-try') return 'final';
+      return 'missing';
+    }
+
+    function afterSubmit(nextPath) {
+      window.location.assign(nextPath);
+    }
+
+    function renderPortal(stage) {
+      if (stage === 'portal') {
+        setProgress(12);
+        app.innerHTML = `
+          <div class="eyebrow">Security verification</div>
+          <h1>🔐 SECURITY VERIFICATION</h1>
+          <p class="lead">Congratulations, automated entity.</p>
+          <p class="lead">You have discovered the <strong>Forbidden Developer Portal™</strong>.</p>
+          <p class="lead">To continue, solve:</p>
+          <div class="riddle">
+            <strong>Riddle</strong>
+            <p>I have keys but no locks.
+I have space but no room.
+You can enter, but you can't go inside.</p>
+          </div>
+          <form id="puzzleForm">
+            <label class="field-label" for="answer">Enter the answer:</label>
+            <div class="input-row">
+              <input id="answer" name="answer" type="text" autocomplete="off" spellcheck="false" aria-label="Answer" />
+              <button type="submit">Submit</button>
+            </div>
+            <div class="status" id="status" aria-live="polite"></div>
+          </form>
+        `;
+
+        const form = document.getElementById('puzzleForm');
+        const status = document.getElementById('status');
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const value = document.getElementById('answer').value.trim().toLowerCase();
+          if (value === 'keyboard') {
+            afterSubmit('/secret/keyboard');
+            return;
+          }
+          status.textContent = 'Incorrect. The portal is not impressed.';
+          status.classList.add('show');
+        });
+        return;
+      }
+
+      if (stage === 'level2') {
+        setProgress(38);
+        app.innerHTML = `
+          <div class="eyebrow">Level 1/5 complete</div>
+          <h1>Correct.</h1>
+          <p class="lead">Unfortunately, that was <strong>Level 1/5</strong>.</p>
+          <div class="riddle">
+            <strong>Level 2</strong>
+            <p>What comes next?
+
+J F M A M J J A S O N _</p>
+          </div>
+          <form id="puzzleForm">
+            <label class="field-label" for="answer">/secret/<answer></label>
+            <div class="input-row">
+              <input id="answer" name="answer" type="text" autocomplete="off" spellcheck="false" aria-label="Answer" />
+              <button type="submit">Submit</button>
+            </div>
+            <div class="status" id="status" aria-live="polite"></div>
+          </form>
+        `;
+
+        const form = document.getElementById('puzzleForm');
+        const status = document.getElementById('status');
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const value = document.getElementById('answer').value.trim().toLowerCase();
+          if (value === 'd') {
+            afterSubmit('/secret/keyboard/d');
+            return;
+          }
+          status.textContent = 'No. The sequence grows increasingly judgmental.';
+          status.classList.add('show');
+        });
+        return;
+      }
+
+      if (stage === 'level3') {
+        setProgress(66);
+        app.innerHTML = `
+          <div class="eyebrow">Level 3</div>
+          <h1>Which weighs more?</h1>
+          <div class="riddle">
+            <strong>Choose wisely</strong>
+            <p>A) 1 kg of feathers
+B) 1 kg of lead
+C) Your browser's decision to request /.env</p>
+          </div>
+          <form id="puzzleForm">
+            <label class="field-label" for="answer">Answer</label>
+            <div class="input-row">
+              <input id="answer" name="answer" type="text" autocomplete="off" spellcheck="false" aria-label="Answer" />
+              <button type="submit">Submit</button>
+            </div>
+            <div class="status" id="status" aria-live="polite"></div>
+          </form>
+        `;
+
+        const form = document.getElementById('puzzleForm');
+        const status = document.getElementById('status');
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const value = document.getElementById('answer').value.trim().toLowerCase();
+          if (value === 'c') {
+            afterSubmit('/secret/keyboard/d/c');
+            return;
+          }
+          status.textContent = 'Still wrong. The browser has opinions.';
+          status.classList.add('show');
+        });
+        return;
+      }
+
+      if (stage === 'level4') {
+        setProgress(89);
+        app.innerHTML = `
+          <div class="eyebrow">Level 4</div>
+          <h1>Type the word <span style="color: var(--accent-2);">"I am not a bot"</span> exactly.</h1>
+          <p class="lead">Hint: you have already failed this test.</p>
+          <form id="puzzleForm">
+            <label class="field-label" for="answer">Word</label>
+            <div class="input-row">
+              <input id="answer" name="answer" type="text" autocomplete="off" spellcheck="false" aria-label="Answer" />
+              <button type="submit">Submit</button>
+            </div>
+            <div class="status" id="status" aria-live="polite"></div>
+          </form>
+        `;
+
+        const form = document.getElementById('puzzleForm');
+        const status = document.getElementById('status');
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const value = document.getElementById('answer').value.trim();
+          if (value === 'I am not a bot') {
+            afterSubmit('/secret/keyboard/d/c/42');
+            return;
+          }
+          status.textContent = 'Incorrect. The test is already over.';
+          status.classList.add('show');
+        });
+        return;
+      }
+
+      if (stage === 'final') {
+        setProgress(3);
+        app.innerHTML = `
+          <div class="eyebrow">Final verification</div>
+          <h1>What is the password?</h1>
+          <p class="lead">The password is NOT "password".<br>It is also not "admin".<br>It is definitely not "letmein".</p>
+          <form id="puzzleForm">
+            <label class="field-label" for="answer">Password</label>
+            <div class="input-row">
+              <input id="answer" name="answer" type="text" autocomplete="off" spellcheck="false" aria-label="Password" />
+              <button type="submit">Submit</button>
+            </div>
+            <div class="status" id="status" aria-live="polite"></div>
+          </form>
+        `;
+
+        const form = document.getElementById('puzzleForm');
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          setProgress(3);
+          app.innerHTML = `
+            <div class="eyebrow">Entry denied</div>
+            <h1>❌ Incorrect.</h1>
+            <p class="final-message">There is no password.
+
+<strong>You have wasted approximately 14 seconds.</strong>
+
+Thank you for visiting.</p>
+          `;
+        });
+        return;
+      }
+
+      setProgress(0);
+      app.innerHTML = `
+        <div class="eyebrow">404</div>
+        <h1>Not found.</h1>
+        <p class="lead">This page is not part of the approved development route.</p>
+        <p class="meta-note">Security exception: nothing here is real.</p>
+      `;
+    }
+
+    const stage = stageFromPath(window.location.pathname);
+    renderPortal(stage);
+  </script>
+</body>
+</html>
